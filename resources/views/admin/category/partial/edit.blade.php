@@ -26,37 +26,26 @@
                     <div class="mb-2">
                                     <label for="position" class="form-label"><b>Position</b></label>
                                     <select name="position" id="position" class="form-select" required>
-                                      <option value="header_top" {{ $data->position == 'header_top' ? 'selected' : '' }}>
-                                        Header Top
+                                     <option value="header_parent" {{ $data->position == 'header_parent' ? 'selected' : '' }}>
+                                        Header Parent
+                                    </option>
+                                    <option value="header_child" {{ $data->position == 'header_child' ? 'selected' : '' }}>
+                                        Header Child
                                     </option>
 
-                                    <option value="header" {{ $data->position == 'header' ? 'selected' : '' }}>
-                                        Header Middle
+                                     <option value="left_side" {{ $data->position == 'left_side' ? 'selected' : '' }}>
+                                        Left Side
                                     </option>
-
-                                    <option value="mega_menu_parent" {{ $data->position == 'mega_menu_parent' ? 'selected' : '' }}>
-                                        Mega Menu Parent
+                                    <option value="feature_product" {{ $data->position == 'feature_product' ? 'selected' : '' }}>
+                                        Featured Product
                                     </option>
-                                    <option value="mega_menu_child" {{ $data->position == 'mega_menu_child' ? 'selected' : '' }}>
-                                        Mega Menu Child
+                                    <option value="banner_section" {{ $data->position == 'banner_section' ? 'selected' : '' }}>
+                                        Banner Section
                                     </option>
-                                    <option value="homepage" {{ $data->position == 'homepage' ? 'selected' : '' }}>
-                                        Home Page
+                                    <option value="exclusive_collection" {{ $data->position == 'exclusive_collection' ? 'selected' : '' }}>
+                                        Exclusive Collection
                                     </option>
-                                    <option value="homepage_banner_category" {{ $data->position == 'homepage_banner_category' ? 'selected' : '' }}>
-                                        Home Page->Banner Category
-                                    </option>
-                                    <option value="homepage_writter_category" {{ $data->position == 'homepage_writter_category' ? 'selected' : '' }}>
-                                        Home Page->Writter Category
-                                    </option>
-                                    <option value="homepage_others_category" {{ $data->position == 'homepage_others_category' ? 'selected' : '' }}>
-                                        Home Page->Others Category
-                                    </option>
-                                    <option value="homepage_brands_category" {{ $data->position == 'homepage_brands_category' ? 'selected' : '' }}>
-                                        Home Page->Brands Category
-                                    </option>
-
-                                    <option value="footer" {{ $data->position == 'footer' ? 'selected' : '' }}>
+                                    <option value="footer_col1" {{ $data->position == 'footer_col1' ? 'selected' : '' }}>
                                         Footer Column1
                                     </option>
 

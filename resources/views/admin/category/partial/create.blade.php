@@ -36,38 +36,26 @@
                         </div>
                         <div class="col-12">
                                     <label for="position" class="form-label"><b>Position</b></label>
-                                    <select name="position" id="position" class="form-select" required>
-                                      <option value="header_top" {{ old('position') == 'header_top' ? 'selected' : '' }}>
-                                        Header Top
+                                    <option value="header_parent" {{ old('position') == 'header_parent' ? 'selected' : '' }}>
+                                        Header Parent
+                                    </option>
+                                    <option value="header_child" {{ old('position') == 'header_child' ? 'selected' : '' }}>
+                                        Header Child
                                     </option>
 
-                                    <option value="header" {{ old('position') == 'header' ? 'selected' : '' }}>
-                                        Header Middle 
+                                     <option value="left_side" {{ old('position') == 'left_side' ? 'selected' : '' }}>
+                                        Left Side
                                     </option>
-
-                                     <option value="mega_menu_parent" {{ old('position') == 'mega_menu_parent' ? 'selected' : '' }}>
-                                        Mega Menu Parent
+                                    <option value="feature_product" {{ old('position') == 'feature_product' ? 'selected' : '' }}>
+                                        Featured Product
                                     </option>
-                                    <option value="mega_menu_child" {{ old('position') == 'mega_menu_child' ? 'selected' : '' }}>
-                                        Mega Menu Child
+                                    <option value="banner_section" {{ old('position') == 'banner_section' ? 'selected' : '' }}>
+                                        Banner Section
                                     </option>
-                                    <option value="homepage" {{ old('position') == 'homepage' ? 'selected' : '' }}>
-                                        Home Page
+                                    <option value="exclusive_collection" {{ old('position') == 'exclusive_collection' ? 'selected' : '' }}>
+                                        Exclusive Collection
                                     </option>
-                                    <option value="homepage_banner_category" {{ old('position') == 'homepage_banner_category' ? 'selected' : '' }}>
-                                        Home Page->Banner Category
-                                    </option>
-                                    <option value="homepage_writter_category" {{ old('position') == 'homepage_writter_category' ? 'selected' : '' }}>
-                                        Home Page->Writter Category
-                                    </option>
-                                    <option value="homepage_others_category" {{ old('position') == 'homepage_others_category' ? 'selected' : '' }}>
-                                        Home Page->Others Category
-                                    </option>
-                                    <option value="homepage_brands_category" {{ old('position') == 'homepage_brands_category' ? 'selected' : '' }}>
-                                        Home Page->Brands Category
-                                    </option>
-
-                                    <option value="footer" {{ old('position') == 'footer' ? 'selected' : '' }}>
+                                    <option value="footer_col1" {{ old('position') == 'footer_col1' ? 'selected' : '' }}>
                                         Footer Column1
                                     </option>
 

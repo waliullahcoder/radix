@@ -55,9 +55,9 @@
      @yield('content')
     <!-- Latest Product Section End -->
 
-    <!-- Blog Section Begin -->
-    @include('layouts.frontend.partial.blog_section')
-    <!-- Blog Section End -->
+    <!-- Exclusive Section Begin -->
+    @include('layouts.frontend.partial.exclusive_section')
+    <!-- Exclusive Section End -->
 
     <!-- Footer Section Begin -->
     @include('layouts.frontend.partial.footer')

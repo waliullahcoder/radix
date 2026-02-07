@@ -7,6 +7,46 @@
     box-sizing: border-box;
 }
 
+/* Marquee */
+ .top-left-list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.top-left-list li {
+    list-style: none;
+    color: #fff;
+    font-size: 14px;
+}
+
+.email-item i {
+    margin-right: 6px;
+    color: #7fad39; /* brand color vibe */
+}
+
+/* marquee container */
+.marquee {
+    width: 320px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 15s linear infinite;
+    font-weight: bold;
+    color: #0d011b;
+}
+
+/* animation */
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
 /* WRAPPER */
 .nav-wrapper {
     position: relative;
