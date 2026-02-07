@@ -1,0 +1,20 @@
+
+Import korar jonno use DB
+=================================
+-- Dumping database structure for books
+DROP DATABASE IF EXISTS `busines2_books_and_books`;
+CREATE DATABASE `busines2_books_and_books`
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+USE `busines2_books_and_books`;
+
+
+Export System
+==================
+Go-> HeidiSQL->select db
+Go-> Tools -> Export Database as SQL
+select
+Database->drop and create checkbox and Table also 4 option
+select Delete + Insert
+Write name sql file
+Export
