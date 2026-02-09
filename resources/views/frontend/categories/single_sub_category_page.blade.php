@@ -58,80 +58,36 @@
             <div class="col-lg-9">
                 <div class="category-product-section pb-4">
                     <div class="container">
-
-                        <div class="section-card">
-
-                            <!-- Section Header -->
-                            <div class="section-header mb-3">
+<div class="section-header mb-3">
                                 <h3 class="section-title">
                                     {{ $single_sub_category->name }}
                                 </h3>
                             </div>
-
+                        <div class="row">
                             <!-- PRODUCTS -->
-                            @if($single_sub_category->products->count() > 0)
-                                <div class="position-relative">
-                                    <div class="d-flex flex-wrap">
-
-                                        @foreach($single_sub_category->products as $product)
-                                            <div class="p-sm-2 p-1" style="width:25%;">
-                                                <div class="product-card-wrapper">
-                                                    <div class="product-card">
-
-                                                        <div class="discount-badge">
-                                                            <span class="product-discount">{{number_format($product->discount)}}</span>
-                                                        </div>
-
-                                                    <a class="z-2"href="{{ route('product.details', $product->id) }}">
-                                                        <figure class="product-card-image ratio"
-                                                                style="--bs-aspect-ratio: 130%">
-                                                       
-                                                            <img class="object-fit-contain product-img"
-                                                                 src="{{ asset($product->thumbnail) }}"
-                                                                 alt="{{ $product->name }}">
-                                                        </figure>
-
-                                                        <div class="product-card-content">
-                                                            <h6 class="h6 product-card-title truncate-text"
-                                                                style="--lines: 2;">
-                                                                    {{ $product->name }}
-                                                               
-                                                            </h6>
-                                                            <b class="product-card-title truncate-text"
-                                                                style="--lines: 2;">
-                                                                CODE-{{ $product->id }}
-                                                            </b>
-                                                           <span class="product-card-price">
-                                                        <del>
-                                                         <span class="Price-amount">
-                                                                 {{ number_format($product->regular_price) }} <span class="Price-currencySymbol">৳</span>
-                                                            </span>
-                                                        </del>
-                                                        <ins>
-                                                        <span class="Price-amount"> {{ number_format($product->sale_price ?? $product->regular_price) }}<span class="Price-currencySymbol">৳</span>
-                                                        </span>
-                                                         </ins>
-                                                        </span>
-                                                        </div>
-                                                            </a>
-                                                        <div class="product-card-action">
-                                                            <button class="btn btn-sm btn-danger add-to-cart"
-                                                            data-id="{{ $product->id }}">
-                                                            Add to Cart
-                                                        </button>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                     
-                                            </div>
-                                        @endforeach
-
-                                    </div>
-                                </div>
-                            @else
-                                <p class="text-muted">No products found.</p>
-                            @endif
+                            @if($single_sub_category->products->count()> 0)
+                     @foreach($single_sub_category->products as $product)
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                        <div class="featured__item">
+                       <a href="{{route('product.details', $product->id)}}"> <div class="featured__item__pic set-bg product-img" data-setbg="{{ asset($product->thumbnail) }}"></a>
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{{route('product.details', $product->id)}}">{{$product->name}} </a></h6>
+                            <b>CODE-{{ $product->id }}</b><br>
+                            <del>৳{{ number_format($product->sale_price) }}</del>
+                            <h5> ৳{{ number_format($product->regular_price) }}</h5>
+                        </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    @else
+                        <p>No subjects</p>
+                    @endif
 
                         </div>
 

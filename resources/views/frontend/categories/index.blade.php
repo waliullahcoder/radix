@@ -1,6 +1,40 @@
 @extends('layouts.frontend.app')
 
 @section('content')
+<style>
+   .product__item {
+    position: relative;
+    padding: 15px;
+    text-align: center;
+}
+
+.product__item h5 {
+    margin-top: 10px;
+}
+
+.product__item .price del {
+    font-size: 13px;
+    color: #999;
+}
+
+.product__item .price span {
+    color: #2ecc71;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.product-discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+</style>
 <div class="category-page py-4">
     <div class="container">
         <div class="row">
@@ -123,124 +157,45 @@
 
             <!-- RIGHT CONTENT -->
          <div class="col-lg-9">
-    <div class="category-product-section pb-4">
-       
-        <div class="container">
-             @foreach($subcategories as $sub)
-                <div class="section-card">
-                    <!-- Section Header -->
-                    <div class="section-header mb-3">
+        @foreach($subcategories as $sub)
+                  <div class="section-header mb-3">
                         <h3 class="section-title">{{$sub->name}}</h3>
-                        <a href="{{route('category.singleCategoryPage', $sub->id)}}" class="section-link">সবগুলো দেখুন</a>
+                        <a href="{{route('category.singleCategoryPage', $sub->id)}}" class="section-link">See Details</a>
                     </div>
-
-                    <div class="position-relative">
-                        <!-- Swiper -->
-                        <div class="swiper carousel"
-                             data-items="2"
-                             data-xl-items="6"
-                             data-lg-items="4"
-                             data-md-items="4"
-                             data-sm-items="3"
-                             data-xs-items="2"
-                             data-margin="4"
-                             data-dots="false"
-                             data-arrows="true">
-
-                            <div class="swiper-wrapper">
-
-                                <!-- Product Slide -->
-                              @if($sub->products->count()> 0)
-                               @foreach($sub->products as $product)
-                                <div class="swiper-slide">
-                                    <div class="p-sm-2 p-1">
-                                        <div class="product-card-wrapper">
-                                            <div class="product-card">
-
-                                                <div class="discount-badge">
-                                                    <span class="product-discount">{{number_format($product->discount)}}</span>
-                                                </div>
-                                        <a class="z-2" href="{{route('product.details', $product->id)}}">
-                                                <figure class="product-card-image ratio" style="--bs-aspect-ratio: 130%">
-                                                  
-                                                    <img class="object-fit-contain product-img"
-                                                        src="{{ asset($product->thumbnail) }}"
-                                                         alt="">
-                                                </figure>
-
-                                                <div class="product-card-content">
-                                                    <h6 class="h6 product-card-title truncate-text" style="--lines: 2;">
-                                                      
-                                                         {{$product->name}}
-                                                    </h6>
-                                                    <b class="product-card-title truncate-text"
-                                                        style="--lines: 2;">
-                                                        CODE-{{ $product->id }}
-                                                    </b>
-                                                    <span class="product-card-price">
-                                                        <del>
-                                                            <span class="Price-amount">
-                                                                 {{ number_format($product->sale_price, 2) }} <span class="Price-currencySymbol">৳</span>
-                                                            </span>
-                                                        </del>
-                                                          
-                                                        <ins>
-                                                            <span class="Price-amount">
-                                                                 {{ number_format($product->regular_price, 2) }} <span class="Price-currencySymbol">৳</span>
-                                                            </span>
-                                                        </ins>
-                                                    </span>
-                                                </div>
-                                                </a>
-                                                <div class="product-card-action">
-                                                   <button class="btn btn-sm btn-danger add-to-cart"
-                                                        data-variant_id="{{ $product->variants[0]->id ?? null }}"
-                                                        data-id="{{ $product->id }}">
-                                                    Add to Cart
-                                                </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                               @endforeach
-                                @else
-                                    <p>No subjects</p>
-                                @endif
-                                <!-- Product Slide -->
-                           
-
-                            </div>
-
-                            <!-- Swiper Arrows -->
-                           <div class="swiper-arrow-btn swiper-button-prev" data-target="#category-swiper">
-                        <svg width="11" height="16" viewBox="0 0 11 16" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M9.7637 0.333588C10.1815 0.741772 10.1815 1.42208 9.77223 1.83026L3.5905 7.99554L9.7637 14.1608C10.1815 14.5775 10.1815 15.2493 9.7637 15.666C9.3459 16.0827 8.67231 16.0827 8.25451 15.666L1.16897 8.59931C0.836434 8.26767 0.836434 7.73192 1.16897 7.40027L8.25451 0.333588C8.67231 -0.0831001 9.3459 -0.0831001 9.7637 0.333588Z"
-                                fill="#333333"></path>
-                        </svg>
-                    </div>
-                    <div class="swiper-arrow-btn swiper-button-next" data-target="#category-swiper">
-                        <svg width="11" height="16" viewBox="0 0 11 16" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M9.7637 0.333588C10.1815 0.741772 10.1815 1.42208 9.77223 1.83026L3.5905 7.99554L9.7637 14.1608C10.1815 14.5775 10.1815 15.2493 9.7637 15.666C9.3459 16.0827 8.67231 16.0827 8.25451 15.666L1.16897 8.59931C0.836434 8.26767 0.836434 7.73192 1.16897 7.40027L8.25451 0.333588C8.67231 -0.0831001 9.3459 -0.0831001 9.7637 0.333588Z"
-                                fill="#333333"></path>
-                        </svg>
-                    </div>
-
+        <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                     @if($sub->products->count()> 0)
+                     @foreach($sub->products as $product)
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                        <div class="featured__item">
+                       <a href="{{route('product.details', $product->id)}}"> <div class="featured__item__pic set-bg product-img" data-setbg="{{ asset($product->thumbnail) }}"></a>
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
                         </div>
-                        <!-- End Swiper -->
-
+                        <div class="featured__item__text">
+                            <h6><a href="{{route('product.details', $product->id)}}">{{$product->name}} </a></h6>
+                            <b>CODE-{{ $product->id }}</b><br>
+                            <del>৳{{ number_format($product->sale_price) }}</del>
+                            <h5> ৳{{ number_format($product->regular_price) }}</h5>
+                        </div>
+                        </div>
                     </div>
+                    @endforeach
+                    @else
+                        <p>No subjects</p>
+                    @endif
+                   
                 </div>
-              @endforeach
-
+            </div>
         </div>
-        
-    </div>
+    </section>
+    @endforeach
+
 </div>
 
             <!-- END RIGHT CONTENT -->

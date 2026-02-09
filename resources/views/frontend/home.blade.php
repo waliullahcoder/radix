@@ -1,4 +1,4 @@
-@extends('layouts.frontend.app')
+@extends('layouts.frontend.appHome')
 
 @section('content')
        <section class="latest-product spad">

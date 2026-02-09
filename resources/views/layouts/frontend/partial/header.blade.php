@@ -48,47 +48,27 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="#"><img src="frontend/images/logo.png" alt="" loading="lazy" decoding="async"></a>
+                        <a href="{{route('home')}}"><img src="{{ asset(file_exists($settings->logo) ? $settings->logo : 'frontend/images/logo.png') }}" alt="" loading="lazy" decoding="async"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Shop<span class="arrow_carrot-down"></span></a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="#">All Products</a></li>
-                                    <li><a href="#">New Arrivals</a></li>
-                                    <li><a href="#">Best Sellers</a></li>
-                                    <li><a href="#">Combo / Bundle Offers</a></li>
-                                    <li><a href="#">Clearance Sale</a></li>
-                                </ul>
+                            <li class="active"><a href="{{route('home')}}">Home</a></li>
+                            @foreach ($menus['header_parent'] as $menu)
+                            <li><a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">{{$menu->name}}@if(isset($menus['header_child'][$menu->id]) && $menus['header_child'][$menu->id]->count() > 0)<span class="arrow_carrot-down">@endif</span></a>
+                                @if(isset($menus['header_child'][$menu->id]))
+                                  @foreach ($menus['header_child'][$menu->id]->chunk(3) as $chunk)
+                                    <ul class="header__menu__dropdown">
+                                        @foreach ($chunk as $item)
+                                        <li><a href="{{route('category.singleCategoryPage', $item->id)}}">{{ $item->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                  @endforeach
+                                 @endif
                             </li>
-                            <li><a href="#">Categories<span class="arrow_carrot-down"></span></a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="#">Cheapest</a></li>
-                                    <li><a href="#">Normal</a></li>
-                                    <li><a href="#">Exclusive</a></li>
-                                    <li><a href="#">Local</a></li>
-                                    <li><a href="#">Expensive</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Offers<span class="arrow_carrot-down"></span></a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="#">Today’s Deals</a></li>
-                                    <li><a href="#">Flash Sale</a></li>
-                                    <li><a href="#">Coupon Offers</a></li>
-                                    <li><a href="#">Seasonal Offers (Eid, Puja, New Year)</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">About<span class="arrow_carrot-down"></span></a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="#">Our Story</a></li>
-                                    <li><a href="#">Factory & Quality</a></li>
-                                    <li><a href="#">Certifications</a></li>
-                                    <li><a href="#">Why Choose Us</a></li>
-                                </ul>
-                            </li>
+                            @endforeach
+                            
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </nav>

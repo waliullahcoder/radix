@@ -36,6 +36,7 @@
                         </div>
                         <div class="col-12">
                                     <label for="position" class="form-label"><b>Position</b></label>
+                                     <select name="position" id="position" class="form-select" required>
                                     <option value="header_parent" {{ old('position') == 'header_parent' ? 'selected' : '' }}>
                                         Header Parent
                                     </option>

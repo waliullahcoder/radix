@@ -1,4 +1,4 @@
-<section class="hero">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -8,17 +8,9 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Men’z Collection</a></li>
-                            <li><a href="#">Women’s Collection</a></li>
-                            <li><a href="#">Kids Collection</a></li>
-                            <li><a href="#">Baby Collection</a></li>
-                            <li><a href="#">Unisex Collection</a></li>
-                            <li><a href="#">Whole sales </a></li>
-                            <li><a href="#">Trendy Collection</a></li>
-                            <li><a href="#">Stylish Collection</a></li>
-                            <li><a href="#">Mela Collection</a></li>
-                            <li><a href="#">Others Collection</a></li>
-                            <li><a href="#">50% Discount</a></li>
+                            @foreach($menus['header_parent'] as $menu)
+                            <li><a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">{{$menu->name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -51,10 +43,9 @@
                             <p>Fresh Designs • Comfy Fabric • Everyday Moja</p>
                             <a href="#" class="primary-btn">SHOP NOW</a>
 
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+ 

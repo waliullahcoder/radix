@@ -8,10 +8,9 @@
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Exclusive Offer</li>
-                            <li data-filter=".fresh-meat">Best Sales</li>
-                            <li data-filter=".vegetables">Discount Offer</li>
-                            <li data-filter=".fastfood">Normal Collection</li>
+                            @foreach($menus['header_parent'] as $menu)
+                            <li data-filter=".{{ $menu->slug }}"><a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">{{ $menu->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

@@ -37,15 +37,18 @@ $menus = Category::whereNull('parent_id')
     ->get()
     ->groupBy('position');
 
-$data['top_menus']         = $menus['header_top']        ?? collect();
-$data['middle_menus']      = $menus['header']            ?? collect();
-$data['mega_menus']        = $menus['mega_menu_parent']  ?? collect();
-$data['footer_col1_menus'] = $menus['footer_col1']       ?? collect();
-$data['footer_col2_menus'] = $menus['footer_col2']       ?? collect();
+$data['header_parent']         = $menus['header_parent']        ?? collect();
+$data['header_child']      = $menus['header_child']            ?? collect();
+$data['left_side']        = $menus['left_side']  ?? collect();
+$data['feature_product'] = $menus['feature_product']       ?? collect();
+$data['banner_section'] = $menus['banner_section']       ?? collect();
+$data['exclusive_collection'] = $menus['exclusive_collection']       ?? collect();
+$data['footer_col1'] = $menus['footer_col1']       ?? collect();
+$data['footer_col2'] = $menus['footer_col2']       ?? collect();
 
-$data['sub_menus'] = Category::whereNotNull('parent_id')
+$data['header_child'] = Category::whereNotNull('parent_id')
     ->where('status', 1)
-    ->where('position', 'mega_menu_child')
+    ->where('position', 'header_child')
     ->select(
         'id',
         'name',
@@ -55,31 +58,9 @@ $data['sub_menus'] = Category::whereNotNull('parent_id')
     ->get()
     ->groupBy('parent_id');
 
-return $data;
+    return $data;
 
 
-
-        // $menus = Menu::where('menus.status', true)
-        // ->join('categories', 'menus.category_id', '=', 'categories.id')
-        // ->select(
-        //     'menus.*',
-        //     'categories.name as category_name',
-        //     'categories.slug as category_slug'
-        // )
-        // ->get()
-        // ->groupBy('position');
-
-        // $data['top_menus']         = $menus['header_top']   ?? collect();
-        // $data['middle_menus']      = $menus['header']       ?? collect();
-        // $data['mega_menus']        = $menus['mega_menu']    ?? collect();
-        // $data['footer_col1_menus'] = $menus['footer_col1']  ?? collect();
-        // $data['footer_col2_menus'] = $menus['footer_col2']  ?? collect();
-
-
-        // $data['sub_menus'] = DB::table('menu_items')
-        //     ->get()
-        //     ->groupBy('menu_id');
-        // return $data;
     }
 
      public function getSubCategoryData($category_id){
