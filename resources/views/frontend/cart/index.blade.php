@@ -101,7 +101,7 @@
                         <form action="{{ route('cart.clear') }}" method="POST">
                             @csrf
                             <button class="primary-btn cart-btn cart-btn-right">
-                                🗑 Empty Cart
+                                🗑 Remove Cart
                             </button>
                         </form>
                     </div>

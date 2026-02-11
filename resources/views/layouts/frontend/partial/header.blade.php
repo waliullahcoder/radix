@@ -78,11 +78,6 @@
                         <ul>
                             <li><a href="{{ route('cart.index') }}" class="cart-icon"><i class="fa fa-shopping-bag"></i> <span class="cart-count">{{ count(session('cart', [])) }}</span></a></li>
                         </ul>
-
-                        <!-- <a href="{{ route('cart.index') }}" class="cart-icon">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="cart-count">{{ count(session('cart', [])) }}</span>
-                        </a> -->
                         @if (Auth::check())
                         <a class="header-link" href="{{ Auth::user()->role_status == 0 ? route('frontend.user.dashboard') : route('admin.dashboard') }}">
                            <strong> {{ Auth::user()->name }} </strong>
