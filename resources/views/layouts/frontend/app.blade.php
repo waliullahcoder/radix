@@ -63,16 +63,27 @@ $(document).ready(function () {
     $('.add-to-cart').click(function (e) {
         e.preventDefault();
 
-        let button = $(this);   // ✅ আগে declare
+        let button = $(this);
 
         let productId = button.data('id');
         let variantId = button.data('variant_id');
+
+        // 🔥 Selected size dhora
+        let selectedSize = $('input[name="size"]:checked').val();
+
+        if (!selectedSize) {
+            alert('Please select a size');
+            return;
+        }
+
         let image = button.closest('.product-card').find('.product-img');
         let cart = $('.cart-icon');
-  if (!image.length) {
+
+        if (!image.length) {
             console.warn('Product image not found for flying animation');
             return;
         }
+
         let flyingImg = image.clone()
             .css({
                 position: 'absolute',
@@ -96,7 +107,8 @@ $(document).ready(function () {
         $.post("{{ route('cart.add') }}", {
             _token: "{{ csrf_token() }}",
             product_id: productId,
-            variant_id: variantId
+            variant_id: variantId,
+            size: selectedSize   // 🔥 size pass hocche
         }, function (res) {
             $('.cart-count').text(res.count);
         });
@@ -105,6 +117,7 @@ $(document).ready(function () {
 
 });
 </script>
+
 <script>
 $(document).ready(function () {
 

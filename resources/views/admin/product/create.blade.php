@@ -102,6 +102,12 @@
                         @endforeach
                     </select>
                 </div>
+               
+                <div class="col-12">
+                    <label for="tags" class="form-label"><b>Variant</b></label>
+                    <input type="text" class="form-control" id="tags" name="variants[]" value="{{ old('variant.0') }}"
+                        placeholder="Variant">
+                </div>
                 <div class="col-sm-6">
                     <label for="vendor_id" class="form-label"><b>Suppliers</b></label>
                     <select name="vendor_id[]" id="vendor_id" class="form-select select" data-placeholder="Select Vendors"

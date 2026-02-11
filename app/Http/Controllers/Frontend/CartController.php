@@ -29,6 +29,7 @@ class CartController extends Controller
                 'price' => $product->sale_price,
                 'qty'   => 1,
                 'variant_id' => $request->variant_id,
+                'size' => $request->size,
                 'image' => $product->thumbnail,
             ];
         }

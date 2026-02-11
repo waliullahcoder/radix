@@ -150,8 +150,8 @@
                         <div class="featured__item__text">
                             <h6><a href="{{route('product.details', $product->id)}}">{{$product->name}} </a></h6>
                             <b>CODE-{{ $product->id }}</b><br>
-                            <del>৳{{ number_format($product->sale_price) }}</del>
-                            <h5> ৳{{ number_format($product->regular_price) }}</h5>
+                            
+                            <h5><del>৳{{ number_format($product->sale_price) }}</del> ৳{{ number_format($product->regular_price) }}</h5>
                             <button class="btn btn-sm btn-danger add-to-cart"
                                                             data-id="{{ $product->id }}">Add to Cart 
                                                         </button>

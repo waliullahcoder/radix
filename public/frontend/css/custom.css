@@ -541,4 +541,52 @@
     width:20%; /* 5 steps = 100 / 5 */
 }
 
+del{
+    color: #999;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+
+/*Single product page CSS */
+
+.size-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.size-wrapper span.label-title {
+    font-weight: 600;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.size-option input[type="radio"] {
+    display: none;
+}
+
+.size-option label {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.size-option label:hover {
+    border-color: #7fad39;
+    color: #7fad39;
+}
+
+.size-option input[type="radio"]:checked + label {
+    background: #7fad39;
+    color: #fff;
+    border-color: #7fad39;
+    box-shadow: 0 4px 10px rgba(127,173,57,0.3);
+}
 

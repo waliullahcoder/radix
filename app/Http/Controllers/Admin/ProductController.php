@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Attribute;
 use App\Models\ProductTag;
+use App\Models\ProductVariant;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Models\AttributeValue;
@@ -128,12 +129,31 @@ class ProductController extends Controller
                     ->store($request->except(['_token', 'choice']));
 
                 // ✅ VARIANT (safe)
-                if ($request->filled('choice_no')) {
-                    $this->productVariantService->store(
-                        $request->only(['choice_no', 'purchase_price', 'sale_price', 'sku']),
-                        $product
-                    );
+            //   if ($request->filled('variant')) {
+            //         $this->productVariantService->store(
+            //             $request->only(['variant', 'purchase_price', 'sale_price', 'sku']),
+            //             $product
+            //         );
+            //     }
+
+          if (!empty($request->variants) && isset($request->variants[0])) {
+                    $variants = json_decode($request->variants[0]);
+                    if (is_array($variants) || is_object($variants)) {
+                        foreach ($variants as $variant) {
+                            ProductVariant::create([
+                                'product_id' => $product->id,
+                                'variant' => $variant->value,
+                                'sku'            => $request->sku ?? null,
+                                'purchase_price' => $request->purchase_price ?? 0,
+                                'regular_price'  => $request->regular_price ?? 0,
+                                'sale_price'     => $request->sale_price ?? 0,
+                                'status'         => true,
+                            ]);
+                        }
+                    }
                 }
+
+
 
                 // ✅ IMAGES (NULL SAFE)
                 if ($request->hasFile('images')) {
@@ -270,9 +290,9 @@ class ProductController extends Controller
                     ->update($request->except(['_token', 'choice']), $product);
 
                 // ✅ VARIANT (NULL SAFE)
-                if ($request->filled('choice_no')) {
+                if ($request->filled('variant')) {
                     $this->productVariantService->store(
-                        $request->only(['choice_no', 'purchase_price', 'sale_price', 'sku']),
+                        $request->only(['variant', 'purchase_price', 'sale_price', 'sku']),
                         $product
                     );
                 }

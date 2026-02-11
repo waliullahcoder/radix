@@ -46,16 +46,58 @@
         <div class="product-image-side">
             <img class="product-img" src="{{ asset($product->thumbnail) }}" id="mainImage" class="main-img" alt="Product">
             <div class="thumb-group">
-                <img src="https://picsum.photos/id/26/600/600" class="thumb active" onclick="changeImage(this.src, this)">
-                <img src="https://picsum.photos/id/20/600/600" class="thumb" onclick="changeImage(this.src, this)">
-                <img src="https://picsum.photos/id/1/600/600" class="thumb" onclick="changeImage(this.src, this)">
-                <img src="https://picsum.photos/id/60/600/600" class="thumb" onclick="changeImage(this.src, this)">
+                <img src="{{ asset($product->thumbnail) }}" class="thumb active" onclick="changeImage(this.src, this)">
+                @if(isset($product->images[0]))
+                <img src="{{ asset($product->images[0]->image) }}" class="thumb active" onclick="changeImage(this.src, this)">
+                @endif
+                @if(isset($product->images[1]))
+                <img src="{{ asset($product->images[1]->image) }}" class="thumb" onclick="changeImage(this.src, this)">
+                @endif
+                @if(isset($product->images[2]))
+                <img src="{{ asset($product->images[2]->image) }}" class="thumb" onclick="changeImage(this.src, this)">
+                @endif
+                @if(isset($product->images[3]))
+                <img src="{{ asset($product->images[3]->image) }}" class="thumb" onclick="changeImage(this.src, this)">
+                @endif
             </div>
         </div>
 
         <div class="product-info-side">
             <span class="badge">New Arrival</span>
             <h1 class="title">{{ $product->name }}</h1>
+
+            <div class="product__details__option">
+                <div class="size-wrapper">
+                    <span class="label-title">Size:</span>
+
+                    <div class="size-option">
+                        <input type="radio" id="size-xl" name="size" value="XL">
+                        <label for="size-xl">XL</label>
+                    </div>
+
+                    <div class="size-option">
+                        <input type="radio" id="size-xxl" name="size" value="XXL">
+                        <label for="size-xxl">XXL</label>
+                    </div>
+
+                    <div class="size-option">
+                        <input type="radio" id="size-l" name="size" value="L">
+                        <label for="size-l">L</label>
+                    </div>
+
+                    <div class="size-option">
+                        <input type="radio" id="size-m" name="size" value="M">
+                        <label for="size-m">M</label>
+                    </div>
+
+                    <div class="size-option">
+                        <input type="radio" id="size-s" name="size" value="S">
+                        <label for="size-s">S</label>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="price-tag"><del>৳{{ number_format($product->regular_price) }} </del> ৳{{ number_format($product->sale_price) }} ৳</div>
             <p class="description">{!! $product->short_description !!} </p>
             
