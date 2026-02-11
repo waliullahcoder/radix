@@ -126,9 +126,9 @@
 @php
     $subtotal = $order->items->sum('total');
     $discount = $subtotal * 0.10;
-    $afterDiscount = $subtotal - $discount;
-    $tax = $afterDiscount * 0.05;
-    $grandTotal = $afterDiscount + $tax;
+    $tax = $subtotal * 0.05;
+    $grandTotal = $subtotal - $discount+ $tax;
+
 @endphp
 
 {{-- ITEMS --}}

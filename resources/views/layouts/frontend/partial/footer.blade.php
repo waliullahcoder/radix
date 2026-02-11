@@ -63,4 +63,15 @@ Plot No.76, Road No.05, Vatulia, Turag, Dhaka-1230, Dhaka-1230, Bangladesh.</li>
                 </div>
             </div>
         </div>
+        <script>
+    window.addEventListener("scroll", function () {
+        let header = document.querySelector(".sticky-header");
+        if (window.scrollY > 100) {
+            header.classList.add("sticky-active");
+        } else {
+            header.classList.remove("sticky-active");
+        }
+    });
+</script>
+
     </footer>

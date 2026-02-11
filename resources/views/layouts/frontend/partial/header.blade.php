@@ -44,58 +44,98 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="{{route('home')}}"><img src="{{ asset(file_exists($settings->logo) ? $settings->logo : 'frontend/images/logo.png') }}" alt="" loading="lazy" decoding="async"></a>
-                    </div>
+        <style>
+            .sticky-header {
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.sticky-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+            </style>
+        <div class="sticky-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="header__logo">
+                    <a href="{{route('home')}}">
+                        <img src="{{ asset(file_exists($settings->logo) ? $settings->logo : 'frontend/images/logo.png') }}" 
+                             alt="">
+                    </a>
                 </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="{{route('home')}}">Home</a></li>
-                            @foreach ($menus['header_parent'] as $menu)
-                            <li><a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">{{$menu->name}}@if(isset($menus['header_child'][$menu->id]) && $menus['header_child'][$menu->id]->count() > 0)<span class="arrow_carrot-down">@endif</span></a>
-                                @if(isset($menus['header_child'][$menu->id]))
-                                  @foreach ($menus['header_child'][$menu->id]->chunk(3) as $chunk)
+            </div>
+
+            <div class="col-lg-6">
+                <nav class="header__menu">
+                    <ul>
+                        <li class="active"><a href="{{route('home')}}">Home</a></li>
+
+                        @foreach ($menus['header_parent'] as $menu)
+                        <li>
+                            <a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">
+                                {{$menu->name}}
+                                @if(isset($menus['header_child'][$menu->id]) && $menus['header_child'][$menu->id]->count() > 0)
+                                    <span class="arrow_carrot-down"></span>
+                                @endif
+                            </a>
+
+                            @if(isset($menus['header_child'][$menu->id]))
+                                @foreach ($menus['header_child'][$menu->id]->chunk(3) as $chunk)
                                     <ul class="header__menu__dropdown">
                                         @foreach ($chunk as $item)
-                                        <li><a href="{{route('category.singleCategoryPage', $item->id)}}">{{ $item->name }}</a></li>
+                                            <li>
+                                                <a href="{{route('category.singleCategoryPage', $item->id)}}">
+                                                    {{ $item->name }}
+                                                </a>
+                                            </li>
                                         @endforeach
                                     </ul>
-                                  @endforeach
-                                 @endif
-                            </li>
-                            @endforeach
-                            
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="{{ route('cart.index') }}" class="cart-icon"><i class="fa fa-shopping-bag"></i> <span class="cart-count">{{ count(session('cart', [])) }}</span></a></li>
-                        </ul>
-                        @if (Auth::check())
-                        <a class="header-link" href="{{ Auth::user()->role_status == 0 ? route('frontend.user.dashboard') : route('admin.dashboard') }}">
-                           <strong> {{ Auth::user()->name }} </strong>
-                        </a>
-                        @else
-                        <a class="header-link" href="{{route('auth.signinPage') }}">
-                         <i class="fa fa-user"></i>
-                            <span class="d-sm-inline-block d-none">
-                                Sign in
-                            </span>
-                        </a>
-                        @endif
-                    </div>
-                    </div>
-                </div>
+                                @endforeach
+                            @endif
+                        </li>
+                        @endforeach
+
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
+
+            <div class="col-lg-3">
+                <div class="header__cart">
+                    <ul>
+                        <li>
+                            <a href="{{ route('cart.index') }}" class="cart-icon">
+                                <i class="fa fa-shopping-bag"></i> 
+                                <span class="cart-count">{{ count(session('cart', [])) }}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    @if (Auth::check())
+                        <a class="header-link" href="{{ Auth::user()->role_status == 0 ? route('frontend.user.dashboard') : route('admin.dashboard') }}">
+                            <strong>{{ Auth::user()->name }}</strong>
+                        </a>
+                    @else
+                        <a class="header-link" href="{{route('auth.signinPage') }}">
+                            <i class="fa fa-user"></i>
+                            <span class="d-sm-inline-block d-none">Sign in</span>
+                        </a>
+                    @endif
+                </div>
             </div>
         </div>
+
+        <div class="humberger__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</div>
+
     </header>
