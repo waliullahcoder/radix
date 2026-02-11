@@ -41,10 +41,10 @@
     </style>
 
     <div class="container">
-    <div class="product-wrapper">
+    <div class="product-wrapper product-card">
         
         <div class="product-image-side">
-            <img src="{{ asset($product->thumbnail) }}" id="mainImage" class="main-img" alt="Product">
+            <img class="product-img" src="{{ asset($product->thumbnail) }}" id="mainImage" class="main-img" alt="Product">
             <div class="thumb-group">
                 <img src="https://picsum.photos/id/26/600/600" class="thumb active" onclick="changeImage(this.src, this)">
                 <img src="https://picsum.photos/id/20/600/600" class="thumb" onclick="changeImage(this.src, this)">
@@ -60,8 +60,26 @@
             <p class="description">{!! $product->short_description !!} </p>
             
             <div class="action-area">
-                <input type="number" value="1" min="1" class="qty-input">
-                <button class="add-btn">Add to Cart</button>
+                @php
+                    $alreadyWishlisted = auth()->check() &&
+                    auth()->user()->wishlists()->where('product_id', $product->id)->exists();
+                @endphp
+                                    @if($alreadyWishlisted)
+                                        <button class="btn btn-sm btn-danger" disabled>
+                                            ❤️ Wishlisted
+                                        </button>
+                                    @else
+                                        <form action="{{ route('wishlist.store', $product->id) }}"
+                                            method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                🤍 Add to Wishlist
+                                            </button>
+                                        </form>
+                                    @endif
+               
+                <button class="add-btn add-to-cart" data-id="{{ $product->id }}">Add to Cart</button>
             </div>
 
             <p><strong>Category:</strong> Electronics, Audio</p>
