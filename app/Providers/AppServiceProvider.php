@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
                 'categories_prod',
                 Category::with(['children'])
                                         ->whereNull('parent_id')
-                                        ->whereIn('position', ['mega_menu_parent', 'header', 'homepage'])
+                                        ->whereIn('position', ['header_parent', 'left_side', 'feature_product', 'banner_section', 'exclusive_collection', 'footer_col1', 'footer_col2'])
                                         ->where('status', 1)
                                         ->orderBy('name', 'asc')
                                         ->get()

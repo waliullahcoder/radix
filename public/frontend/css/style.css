@@ -753,6 +753,7 @@ ol {
 
 .categories__slider .col-lg-3 {
 	max-width: 100%;
+	margin-left: 2px;
 }
 
 .categories__slider.owl-carousel .owl-nav button {
@@ -831,7 +832,7 @@ a:hover{
 }
 
 .featured__item__pic {
-	height: 270px;
+	height: 200px;
 	position: relative;
 	overflow: hidden;
 	background-position: center center;
@@ -3371,3 +3372,5 @@ a:hover{
 		font-size: 24px;
 	}
 }
+
+

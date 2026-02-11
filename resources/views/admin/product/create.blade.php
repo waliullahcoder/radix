@@ -59,7 +59,7 @@
                                         <option value="">-- Select Sub Category --</option>
                                     </select>
                                 </div>
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                     <label for="author_id" class="form-label"><b>Author <span class="text-danger">*</span></b></label>
                     <select class="form-select select" name="author_id" id="author_id"
                         data-placeholder="Select Author" required>
@@ -69,8 +69,8 @@
                                 {{ $item->name }}</option>
                         @endforeach
                     </select>
-                </div>
-                 <div class="col-sm-6">
+                </div> -->
+                 <!-- <div class="col-sm-6">
                     <label for="publication_id" class="form-label"><b>Publication <span class="text-danger">*</span></b></label>
                     <select class="form-select select" name="publication_id" id="publication_id"
                         data-placeholder="Select Publication" required>
@@ -80,7 +80,7 @@
                                 {{ $item->name }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> -->
                 <div class="col-sm-6">
                     <label for="brand_id" class="form-label"><b>Brand</b><span class="text-danger">*</span></b></label>
                     <select class="form-select select" name="brand_id" id="brand_id" data-placeholder="Select Brand" required>
@@ -102,7 +102,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-12">
+                <div class="col-sm-6">
                     <label for="vendor_id" class="form-label"><b>Suppliers</b></label>
                     <select name="vendor_id[]" id="vendor_id" class="form-select select" data-placeholder="Select Vendors"
                         multiple>
