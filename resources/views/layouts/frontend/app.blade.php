@@ -87,6 +87,7 @@ $(document).ready(function () {
             top: cart.offset().top,
             left: cart.offset().left,
             width: 20,
+            height: 20,
             opacity: 0.5
         }, 700, function () {
             flyingImg.remove();

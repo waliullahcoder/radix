@@ -67,13 +67,12 @@
                             <!-- PRODUCTS -->
                             @if($single_sub_category->products->count()> 0)
                      @foreach($single_sub_category->products as $product)
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat product-card">
                         <div class="featured__item">
                        <a href="{{route('product.details', $product->id)}}"> <div class="featured__item__pic set-bg product-img" data-setbg="{{ asset($product->thumbnail) }}"></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart  add-to-cart" data-id="{{ $product->id }}"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -81,6 +80,9 @@
                             <b>CODE-{{ $product->id }}</b><br>
                             <del>৳{{ number_format($product->sale_price) }}</del>
                             <h5> ৳{{ number_format($product->regular_price) }}</h5>
+                            <button class="btn btn-sm btn-danger add-to-cart"
+                                                            data-id="{{ $product->id }}">Add to Cart
+                                                        </button>
                         </div>
                         </div>
                     </div>

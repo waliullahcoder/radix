@@ -493,7 +493,7 @@ ol {
 .header__cart ul li a span {
 	height: 13px;
 	width: 13px;
-	background: #1d1c3c;
+	background: #05aa57;
 	font-size: 10px;
 	color: #ffffff;
 	line-height: 13px;
@@ -753,7 +753,6 @@ ol {
 
 .categories__slider .col-lg-3 {
 	max-width: 100%;
-	margin-left: 2px;
 }
 
 .categories__slider.owl-carousel .owl-nav button {
@@ -3374,3 +3373,104 @@ a:hover{
 }
 
 
+ .product__item {
+    position: relative;
+    padding: 15px;
+    text-align: center;
+}
+
+.product__item h5 {
+    margin-top: 10px;
+}
+
+.product__item .price del {
+    font-size: 13px;
+    color: #999;
+}
+
+.product__item .price span {
+    color: #2ecc71;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.product-discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+
+</style>
+<style>
+
+
+/* Product Text */
+.featured__item__text {
+    text-align: center;
+}
+
+.featured__item__text h6 a {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.featured__item__text h6 a:hover {
+    color: #e74c3c;
+}
+
+.featured__item__text b {
+    font-size: 12px;
+    color: #888;
+}
+
+.featured__item__text del {
+    color: #999;
+    font-size: 13px;
+}
+
+.featured__item__text h5 {
+    color: #2ecc71;
+    font-weight: 700;
+    margin: 5px 0;
+}
+
+/* Button */
+.add-to-cart {
+    width: 100%;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+
+/* Section Header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title {
+    font-weight: 700;
+    margin: 0;
+}
+
+.section-link {
+    font-size: 13px;
+    text-decoration: none;
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.section-link:hover {
+    text-decoration: underline;
+}

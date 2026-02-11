@@ -1,40 +1,8 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-<style>
-   .product__item {
-    position: relative;
-    padding: 15px;
-    text-align: center;
-}
 
-.product__item h5 {
-    margin-top: 10px;
-}
 
-.product__item .price del {
-    font-size: 13px;
-    color: #999;
-}
-
-.product__item .price span {
-    color: #2ecc71;
-    font-weight: 600;
-    margin-left: 5px;
-}
-
-.product-discount {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #e74c3c;
-    color: #fff;
-    padding: 3px 8px;
-    font-size: 12px;
-    border-radius: 20px;
-}
-
-</style>
 <div class="category-page py-4">
     <div class="container">
         <div class="row">
@@ -173,12 +141,10 @@
                        <a href="{{route('product.details', $product->id)}}"> <div class="featured__item__pic set-bg product-img" data-setbg="{{ asset($product->thumbnail) }}"></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                 
-                                <li><a href="#"><button class="btn btn-sm btn-danger add-to-cart"
-                                                            data-id="{{ $product->id }}">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </button></a></li>
+                                <li><a href="#"><button class="btn btn-sm btn-danger add-to-cart" data-id="{{ $product->id }}">
+                                <i class="fa fa-shopping-cart"></i>
+                                </button></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -187,7 +153,7 @@
                             <del>৳{{ number_format($product->sale_price) }}</del>
                             <h5> ৳{{ number_format($product->regular_price) }}</h5>
                             <button class="btn btn-sm btn-danger add-to-cart"
-                                                            data-id="{{ $product->id }}">Add to Cart  <i class="fa fa-plus"></i>
+                                                            data-id="{{ $product->id }}">Add to Cart 
                                                         </button>
                         </div>
                         </div>
