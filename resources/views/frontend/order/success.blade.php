@@ -13,7 +13,7 @@
         </p>
     </div>
 
-    <div class="card shadow-sm mx-auto" style="max-width:800px">
+    <div class="card shadow-sm mx-auto" style="max-width:100%">
         <div class="card-body">
 
             <h5 class="mb-3">
@@ -54,15 +54,12 @@
                     </span>
                 </h5>
             </div>
-
-            <hr>
-
-            <div class="d-flex justify-content-between">
-                <a href="{{ url('/') }}" class="btn btn-outline-secondary">
+            <div class="d-flex justify-content-between" style="margin-top:20px;margin-bottom:20px">
+                <a href="{{ url('/') }}" class="primary-btn cart-btn">
                     Continue Shopping
                 </a>
 
-                <a href="{{ route('orders.index') }}" class="btn btn-danger">
+                <a href="{{ route('orders.index') }}" class="primary-btn">
                     My Orders
                 </a>
             </div>
