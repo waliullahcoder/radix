@@ -56,7 +56,7 @@
                                                     @case('processing') bg-primary @break
                                                     @case('confirmed') bg-success @break
                                                     @case('shipped') bg-info @break
-                                                    @case('delivered') bg-secondary text-dark @break
+                                                    @case('delivered') bg-success @break
                                                     @case('cancelled') bg-danger @break
                                                     @default bg-secondary
                                                 @endswitch
@@ -74,12 +74,14 @@
                                             <a href="{{ route('admin.orders.invoice',$order->id) }}" class="btn btn-outline-success" target="_blank">📄</a>
                                             <a href="{{ route('admin.orders.track',$order->id) }}" class="btn btn-outline-warning">🔄</a>
                                             <!-- STATUS MODAL BUTTON -->
+                                             @if(!in_array($order->status,['delivered','cancelled'])) 
                                             <button
                                                 class="btn btn-outline-dark"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#statusModal{{ $order->id }}">
                                                 ⚙️
                                             </button>
+                                            @endif
                                         </div>
                                     </td>
                                     </tr>

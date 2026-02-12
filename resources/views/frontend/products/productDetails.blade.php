@@ -75,7 +75,7 @@
                 @endphp
                 <div class="size-option">
                     <input type="radio" id="{{ $id }}" name="variant_id" value="{{ $variant->id }}">
-                    <label for="{{ $id }}">{{ $variant->variant ?? 'NA' }}</label>
+                    <label for="{{ $id }}">{{ $variant->size ?? 'NA' }}</label>
                 </div>
                 @endforeach
             </div>

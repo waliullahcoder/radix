@@ -39,7 +39,7 @@
                                 <tr>
                                     <td>{{ $item->product->name }}</td>
                                     <td>
-                                        {{ optional($item->productVariant)->name ?? '-' }}
+                                        {{ optional($item->productVariant)->size ?? '-' }}
                                     </td>
                                     <td>{{ $item->qty }}</td>
                                     <td>৳ {{ number_format($item->price,2) }}</td>

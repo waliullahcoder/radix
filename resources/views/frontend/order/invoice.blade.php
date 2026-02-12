@@ -153,6 +153,9 @@
                 <td style="text-align:right;">৳ {{ number_format($item->total,2) }}</td>
             </tr>
             @endforeach
+            <tr>
+                <td colspan="5">Notes:{{ $order->comments }}</td>
+            </tr>
         </tbody>
     </table>
 </div>

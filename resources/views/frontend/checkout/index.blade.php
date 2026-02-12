@@ -69,8 +69,10 @@
                            </table>
 
                             </div>
-                            
-                            
+                           <div class="checkout__input">
+                                <p>Order notes<span>*</span></p>
+                                <input type="text" name="comments" placeholder="Notes about your order, e.g. special notes for delivery." required>
+                            </div>
                         </div>
 
                          @php

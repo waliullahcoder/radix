@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('discount', 10, 2)->default(0);
             $table->decimal('tax', 10, 2)->default(0);
             $table->decimal('total', 10, 2);
-
+            $table->text('comments')->nullable();
             $table->string('payment_method'); // cod, bkash, rocket
             $table->string('status')->default('pending');
 

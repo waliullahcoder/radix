@@ -66,6 +66,7 @@ class CheckoutController extends Controller
                 'discount'       => $request->discount ?? 0,
                 'tax'            => $request->tax ?? 0,
                 'total'          => $request->total,
+                'comments'       => $request->comments,
                 'payment_method' => $request->payment_method,
                 'status'         => 'pending',
             ]);
