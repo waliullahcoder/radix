@@ -4,13 +4,11 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="frontend/images/logo.png" alt="" loading="lazy" decoding="async"></a>
+                            <a href="{{route('home')}}"><img src="{{ asset(file_exists($settings->logo) ? $settings->logo : 'frontend/images/logo.png') }}" alt="" loading="lazy" decoding="async"></a>
                         </div>
                         <ul>
-                            <li>Address: 
-Plot No.76, Road No.05, Vatulia, Turag, Dhaka-1230, Dhaka-1230, Bangladesh.</li>
-                            <li>Phone: +8801617-475475</li>
-                            <li>Email: info@radix.com.bd, masod@radix.com.bd</li>
+                            <li>{{ $settings->description ?? 'Description' }}</li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -37,17 +35,15 @@ Plot No.76, Road No.05, Vatulia, Turag, Dhaka-1230, Dhaka-1230, Bangladesh.</li>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
+                        <h6>Address</h6>
+                        <p>{{ $settings->address ?? 'Address' }}</p>
+                      
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="{{ $settings->facebook_page ?? '#' }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="{{ $settings->instagram ?? '#' }}" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <a href="{{ $settings->twitter ?? '#' }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="{{ $settings->pinterest ?? '#' }}" target="_blank"><i class="fa fa-pinterest"></i></a>
+                            <a href="{{ $settings->linkedin ?? '#' }}" target="_blank"><i class="fa fa-linkedin"></i></a>
                         </div>
                     </div>
                 </div>
