@@ -90,4 +90,9 @@ class ViewController extends Controller
         $menus = $this->frontEndService->getMenu();
         return view('frontend.auth.signup',compact('menus'));
     }
+    public function contactPage()
+    {
+        $menus = $this->frontEndService->getMenu();
+        return view('frontend.contacts.contact',compact('menus'));
+    }
 }

@@ -82,6 +82,9 @@ p {
 	line-height: 26px;
 	margin: 0 0 15px 0;
 }
+.text-danger{
+	color: rgb(199, 76, 76);
+}
 
 img {
 	max-width: 100%;

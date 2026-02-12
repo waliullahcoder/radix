@@ -20,6 +20,7 @@ Route::get('/login', function () {
     return redirect()->route('auth.signinPage');
 })->name('login');
 Route::get('/signup', [ViewController::class, 'signupPage'])->name('auth.signupPage');
+Route::get('/contact', [ViewController::class, 'contactPage'])->name('contactPage');
 
 Route::post('/signin', [UserController::class, 'signinPost'])->name('user.signinPost');
 Route::post('/signup', [UserController::class, 'signupPost'])->name('user.signupPost');
