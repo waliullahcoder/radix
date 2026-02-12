@@ -67,35 +67,20 @@
             <h1 class="title">{{ $product->name }}</h1>
 
             <div class="product__details__option">
-                <div class="size-wrapper">
-                    <span class="label-title">Size:</span>
-
-                    <div class="size-option">
-                        <input type="radio" id="size-xl" name="size" value="XL" checked>
-                        <label for="size-xl">XL</label>
-                    </div>
-
-                    <div class="size-option">
-                        <input type="radio" id="size-xxl" name="size" value="XXL">
-                        <label for="size-xxl">XXL</label>
-                    </div>
-
-                    <div class="size-option">
-                        <input type="radio" id="size-l" name="size" value="L">
-                        <label for="size-l">L</label>
-                    </div>
-
-                    <div class="size-option">
-                        <input type="radio" id="size-m" name="size" value="M">
-                        <label for="size-m">M</label>
-                    </div>
-
-                    <div class="size-option">
-                        <input type="radio" id="size-s" name="size" value="S">
-                        <label for="size-s">S</label>
-                    </div>
+            <div class="size-wrapper">
+                <span class="label-title">Size:</span>
+                @foreach ($product->variants as $variant)
+                @php
+                    $id = 'size-'.$variant->variant ?? 'NA';
+                @endphp
+                <div class="size-option">
+                    <input type="radio" id="{{ $id }}" name="variant_id" value="{{ $variant->id }}">
+                    <label for="{{ $id }}">{{ $variant->variant ?? 'NA' }}</label>
                 </div>
+                @endforeach
             </div>
+           </div>
+
 
 
             <div class="price-tag"><del>৳{{ number_format($product->regular_price) }} </del> ৳{{ number_format($product->sale_price) }} ৳</div>

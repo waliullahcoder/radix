@@ -66,12 +66,16 @@ $(document).ready(function () {
         let button = $(this);
 
         let productId = button.data('id');
+        // 🔥 Existing variant_id button data
         let variantId = button.data('variant_id');
 
-        // 🔥 Selected size dhora
-        let selectedSize = $('input[name="size"]:checked').val();
+        // 🔥 Selected size jodi undefined hoy
+        if (variantId === undefined) {
+            variantId = $('input[name="variant_id"]:checked').val();
+        }
 
-        if (!selectedSize) {
+        // 🔥 Check
+        if (!variantId) {
             alert('Please select a size');
             return;
         }
@@ -108,7 +112,6 @@ $(document).ready(function () {
             _token: "{{ csrf_token() }}",
             product_id: productId,
             variant_id: variantId,
-            size: selectedSize   // 🔥 size pass hocche
         }, function (res) {
             $('.cart-count').text(res.count);
         });

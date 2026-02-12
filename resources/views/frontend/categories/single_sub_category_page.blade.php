@@ -72,7 +72,7 @@
                        <a href="{{route('product.details', $product->id)}}"> <div class="featured__item__pic set-bg product-img" data-setbg="{{ asset($product->thumbnail) }}"></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart  add-to-cart" data-id="{{ $product->id }}"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart  add-to-cart" data-variant_id="{{ $product->variants[0]->id ?? null }}" data-id="{{ $product->id }}"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -81,6 +81,7 @@
                             
                             <h5><del>৳{{ number_format($product->sale_price) }}</del> ৳{{ number_format($product->regular_price) }}</h5>
                             <button class="btn btn-sm btn-danger add-to-cart"
+                            data-variant_id="{{ $product->variants[0]->id ?? null }}"
                                                             data-id="{{ $product->id }}">Add to Cart
                                                         </button>
                         </div>
