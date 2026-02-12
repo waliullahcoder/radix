@@ -59,10 +59,10 @@
                                 <textarea name="description" id="description" class="form-control" rows="3" placeholder="Footer Description">{{ old('description', $data->description ?? '') }}</textarea>
                             </div>
 
-                            {{-- Google Map --}}
+                            {{-- Marquee --}}
                             <div class="col-12">
-                                <label for="google_map" class="form-label"><b>Google Map</b></label>
-                                <textarea name="google_map" id="google_map" class="form-control" rows="3" placeholder="Google Map">{{ old('google_map', $data->google_map ?? '') }}</textarea>
+                                <label for="google_map" class="form-label"><b>Marquee Message</b></label>
+                                <textarea name="google_map" id="google_map" class="form-control" rows="3" placeholder="Marquee Message">{{ old('google_map', $data->google_map ?? '') }}</textarea>
                             </div>
 
                             <div class="col-sm-6">
@@ -185,6 +185,7 @@
                                             ['youtube', '#FF0000', 'youtube'],
                                             ['twitter', '#1D9BF0', 'twitter'],
                                             ['instagram', '#0077B7', 'instagram'],
+                                            ['linkedin', '#5964f3', 'linkedin'],
                                             ['pinterest', '#E33E2B', 'pinterest'],
                                             ['whatsapp', '#47C756', 'whatsapp'],
                                         ];

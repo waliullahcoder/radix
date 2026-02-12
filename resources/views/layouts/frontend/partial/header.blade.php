@@ -6,12 +6,12 @@
                         <div class="header__top__left">
                             <ul class="top-left-list">
                                 <li class="email-item">
-                                    <i class="fa fa-envelope"></i> info@radix.com.bd
+                                    <i class="fa fa-envelope"></i> {{$settings->primary_email}}
                                 </li>
                                 <li class="marquee-item">
                                     <div class="marquee">
                                         <span>
-                                            🚚 Free Shipping on all orders over $99 — Limited Time Offer!
+                                            🚚 {{ $settings->google_map ?? 'Please Set Marquee Message' }}
                                         </span>
                                     </div>
                                 </li>
@@ -22,10 +22,10 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                <a href="{{ $settings->facebook_page ?? '#' }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ $settings->twitter ?? '#' }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="{{ $settings->linkedin ?? '#' }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                <a href="{{ $settings->pinterest ?? '#' }}" target="_blank"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
                                 <img src="frontend/images/language.png" alt="" loading="lazy" decoding="async">
@@ -37,7 +37,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="{{ route('auth.signupPage') }}"><i class="fa fa-user"></i> Signup</a>
                             </div>
                         </div>
                     </div>
