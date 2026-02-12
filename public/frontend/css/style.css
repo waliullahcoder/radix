@@ -609,7 +609,7 @@ ol {
 
 .hero__search {
 	overflow: hidden;
-	margin-bottom: 30px;
+	margin-bottom: 18px;
 }
 
 .hero__search__form {
@@ -794,6 +794,7 @@ a:hover{
 .featured__controls {
 	text-align: center;
 	margin-bottom: 50px;
+	margin-top: 50px;
 	padding: 10px 0;
 	background: #f7f9f9;
 }

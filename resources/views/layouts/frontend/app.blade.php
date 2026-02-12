@@ -45,18 +45,6 @@
     <!-- Js Plugins -->
     
     @include('layouts.frontend.partial.scripts')
- <!-- Global site tag (gtag.js) - Google Analytics -->
-<!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
-</script> -->
-
-<!-- <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon="{" version":"2024.11.0","token":"cd0b4b3a733644fc843ef0b185f98241","server_timing":{"name":{"cfcachestatus":true,"cfedge":true,"cfextpri":true,"cfl4":true,"cforigin":true,"cfspeedbrain":true},"location_startswith":null}}"="" crossorigin="anonymous"></script> -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
 $(document).ready(function () {
 
