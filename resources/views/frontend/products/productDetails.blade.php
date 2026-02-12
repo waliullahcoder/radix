@@ -71,7 +71,7 @@
                     <span class="label-title">Size:</span>
 
                     <div class="size-option">
-                        <input type="radio" id="size-xl" name="size" value="XL">
+                        <input type="radio" id="size-xl" name="size" value="XL" checked>
                         <label for="size-xl">XL</label>
                     </div>
 

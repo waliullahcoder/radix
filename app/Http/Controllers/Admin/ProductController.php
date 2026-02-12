@@ -136,22 +136,21 @@ class ProductController extends Controller
             //         );
             //     }
 
-          if (!empty($request->variants) && isset($request->variants[0])) {
-                    $variants = json_decode($request->variants[0]);
-                    if (is_array($variants) || is_object($variants)) {
-                        foreach ($variants as $variant) {
-                            ProductVariant::create([
-                                'product_id' => $product->id,
-                                'variant' => $variant->value,
-                                'sku'            => $request->sku ?? null,
-                                'purchase_price' => $request->purchase_price ?? 0,
-                                'regular_price'  => $request->regular_price ?? 0,
-                                'sale_price'     => $request->sale_price ?? 0,
-                                'status'         => true,
-                            ]);
-                        }
-                    }
-                }
+         if ($request->filled('v_variants')) {
+            foreach ($request->v_variants as $key => $variant) {
+                ProductVariant::create([
+                    'product_id' => $product->id,
+                    'variant' => $variant,
+                    'size' => $request->v_size[$key] ?? null,
+                    'purchase_price' => $request->v_purchase_price[$key] ?? 0,
+                    'regular_price' => $request->v_regular_price[$key] ?? 0,
+                    'discount' => $request->v_discount[$key] ?? 0,
+                    'discount_type' => $request->v_discount_type[$key] ?? 'percent',
+                    'sale_price' => $request->v_sale_price[$key] ?? 0,
+                    'status' => true,
+                ]);
+            }
+        }
 
 
 
@@ -290,12 +289,33 @@ class ProductController extends Controller
                     ->update($request->except(['_token', 'choice']), $product);
 
                 // ✅ VARIANT (NULL SAFE)
-                if ($request->filled('variant')) {
-                    $this->productVariantService->store(
-                        $request->only(['variant', 'purchase_price', 'sale_price', 'sku']),
-                        $product
-                    );
+                // if ($request->filled('variants')) {
+                //     $this->productVariantService->store(
+                //         $request->only(['variants', 'purchase_price', 'sale_price', 'sku']),
+                //         $product
+                //     );
+                // }
+
+             // Delete old variants
+                $product->variants()->delete();
+
+                // Insert new/updated variants
+                if ($request->filled('v_variants')) {
+                    foreach ($request->v_variants as $key => $variant) {
+                        ProductVariant::create([
+                            'product_id' => $product->id,
+                            'variant' => $variant,
+                            'size' => $request->v_size[$key] ?? null,
+                            'purchase_price' => $request->v_purchase_price[$key] ?? 0,
+                            'regular_price' => $request->v_regular_price[$key] ?? 0,
+                            'discount' => $request->v_discount[$key] ?? 0,
+                            'discount_type' => $request->v_discount_type[$key] ?? 'percent',
+                            'sale_price' => $request->v_sale_price[$key] ?? 0,
+                            'status' => true,
+                        ]);
+                    }
                 }
+
 
                 // ======================
                 // ✅ IMAGES (NULL SAFE)

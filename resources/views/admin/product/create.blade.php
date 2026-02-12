@@ -102,12 +102,103 @@
                         @endforeach
                     </select>
                 </div>
-               
-                <div class="col-12">
-                    <label for="tags" class="form-label"><b>Variant</b></label>
-                    <input type="text" class="form-control" id="tags" name="variants[]" value="{{ old('variant.0') }}"
-                        placeholder="Variant">
+                <div class="col-sm-6">
+                    <label for="product_type" class="form-label"><b>Product Type <span class="text-danger">*</span></b></label>
+                    <select class="form-select select" name="product_type" id="product_type" data-placeholder="Product Type"
+                        required>
+                        <option value="socks">Socks</option>
+                        <option value="clothes">Clothes</option>
+                        <option value="sanitary">Sanitary</option>
+                        <option value="electric">Electric</option>
+                        <option value="electronic">Electronic</option>
+                        <option value="frozen">Frozen</option>
+                        <option value="beverages">Beverages</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="grocery">Grocery</option>
+                        <option value="others">Others</option>
+                    </select>
                 </div>
+               
+             
+                <!-- Variant section-->
+                <div class="col-12">
+                    <label class="form-label"><b>Product Variants</b></label>
+
+                    <div id="variant-wrapper">
+
+                        <div class="variant-item border rounded p-3 mb-3">
+                            <div class="row g-2">
+
+                                <div class="col-md-1">
+                                    <input type="text" 
+                                        name="v_variants[]" 
+                                        class="form-control"
+                                        placeholder="Color (Red)">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <input type="text" 
+                                        name="v_size[]" 
+                                        class="form-control"
+                                        placeholder="Size (XL)">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <input type="number" step="0.01"
+                                        name="v_purchase_price[]"
+                                        class="form-control"
+                                        placeholder="Purchase Price">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <input type="number" step="0.01"
+                                        name="v_regular_price[]"
+                                        class="form-control v_regular_price"
+                                        placeholder="Regular Price">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <input type="number" step="0.01"
+                                        name="v_discount[]"
+                                        class="form-control v_discount"
+                                        placeholder="Disc">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <input type="number" step="0.01"
+                                        name="v_sale_price[]"
+                                        class="form-control v_sale_price"
+                                        placeholder="Sale"
+                                        readonly>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <select name="v_discount_type[]" 
+                                        class="form-select v_discount_type">
+                                        <option value="percent">%</option>
+                                        <option value="fixed">৳</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1 d-flex">
+                                    <button type="button" 
+                                        class="btn btn-danger remove-variant w-100">
+                                        ✕
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="button" id="add-variant" class="btn btn-primary btn-sm">
+                        + Add More
+                    </button>
+                </div>
+
+
+
                 <div class="col-sm-6">
                     <label for="vendor_id" class="form-label"><b>Suppliers</b></label>
                     <select name="vendor_id[]" id="vendor_id" class="form-select select" data-placeholder="Select Vendors"
@@ -309,6 +400,141 @@
 @endsection
 
 @push('js')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const wrapper = document.getElementById('variant-wrapper');
+    const addBtn = document.getElementById('add-variant');
+
+    // 🔥 Calculate Sale Price
+    function calculateSalePrice(row) {
+
+        let regular = parseFloat(row.querySelector('.v_regular_price')?.value) || 0;
+        let discount = parseFloat(row.querySelector('.v_discount')?.value) || 0;
+        let type = row.querySelector('.v_discount_type')?.value;
+
+        let sale = regular;
+
+        if (type === 'percent') {
+            sale = regular - (regular * discount / 100);
+        } else {
+            sale = regular - discount;
+        }
+
+        if (sale < 0) sale = 0;
+
+        row.querySelector('.v_sale_price').value = sale.toFixed(2);
+    }
+
+    // 🔥 Hide First Remove Button
+    function updateRemoveButtons() {
+        let rows = document.querySelectorAll('.variant-item');
+
+        rows.forEach((row, index) => {
+            let btn = row.querySelector('.remove-variant');
+            btn.style.display = index === 0 ? 'none' : 'block';
+        });
+    }
+
+    // 🔥 Input Listener
+    document.addEventListener('input', function (e) {
+
+        if (
+            e.target.classList.contains('v_regular_price') ||
+            e.target.classList.contains('v_discount')
+        ) {
+            let row = e.target.closest('.variant-item');
+            calculateSalePrice(row);
+        }
+
+    });
+
+    document.addEventListener('change', function (e) {
+
+        if (e.target.classList.contains('v_discount_type')) {
+            let row = e.target.closest('.variant-item');
+            calculateSalePrice(row);
+        }
+
+    });
+
+    // 🔥 Add More
+    addBtn.addEventListener('click', function () {
+
+        let html = `
+        <div class="variant-item border rounded p-3 mb-3">
+            <div class="row g-2">
+
+                <div class="col-md-1">
+                    <input type="text" name="v_variants[]" class="form-control"
+                        placeholder="Color (Red)">
+                </div>
+
+                <div class="col-md-1">
+                    <input type="text" name="v_size[]" class="form-control"
+                        placeholder="Size (XL)">
+                </div>
+
+                <div class="col-md-2">
+                    <input type="number" step="0.01" name="v_purchase_price[]" class="form-control"
+                        placeholder="Purchase">
+                </div>
+
+                <div class="col-md-2">
+                    <input type="number" step="0.01" name="v_regular_price[]" 
+                        class="form-control v_regular_price"
+                        placeholder="Regular">
+                </div>
+
+                <div class="col-md-1">
+                    <input type="number" step="0.01" name="v_discount[]" 
+                        class="form-control v_discount"
+                        placeholder="Disc">
+                </div>
+
+                <div class="col-md-2">
+                    <input type="number" step="0.01" name="v_sale_price[]" 
+                        class="form-control v_sale_price"
+                        placeholder="Sale" readonly>
+                </div>
+
+                <div class="col-md-1">
+                    <select name="v_discount_type[]" 
+                        class="form-select v_discount_type">
+                        <option value="percent">%</option>
+                        <option value="fixed">৳</option>
+                    </select>
+                </div>
+
+                <div class="col-md-1 d-flex">
+                    <button type="button" class="btn btn-danger remove-variant w-100">✕</button>
+                </div>
+
+            </div>
+        </div>
+        `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+        updateRemoveButtons();
+    });
+
+    // 🔥 Remove
+    document.addEventListener('click', function (e) {
+
+        if (e.target.classList.contains('remove-variant')) {
+            e.target.closest('.variant-item').remove();
+            updateRemoveButtons();
+        }
+
+    });
+
+    updateRemoveButtons();
+
+});
+</script>
+
+
+
 <script>
  const subCategories = @json($sub_categories);
     document.getElementById('category_id').addEventListener('change', function () {
