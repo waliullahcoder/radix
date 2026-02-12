@@ -8,51 +8,23 @@
                 </div>
             </div>
             <div class="row">
+                @foreach($menus['left_side'] as $menu)
                 <div class="col-lg-4 col-md-4 col-sm-6">
+                    <a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="frontend/images/blog-1.jpg" alt="" loading="lazy" decoding="async">
+                            <img src="{{ asset($menu->image) }}" alt="" loading="lazy" decoding="async">
                         </div>
                         <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            <h5><a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">{{ $menu->name }}</a></h5>
+                            <p>{{ $menu->description }} sadasdasdadd</p>
                         </div>
                     </div>
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="frontend/images/blog-2.jpg" alt="" loading="lazy" decoding="async">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="frontend/images/blog-3.jpg" alt="" loading="lazy" decoding="async">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Visit the clean farm in the US</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+                
+                
             </div>
         </div>
     </section>

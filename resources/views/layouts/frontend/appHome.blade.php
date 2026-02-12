@@ -65,16 +65,6 @@
     
     @include('layouts.frontend.partial.scripts')
  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
-</script>
-
-<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon="{" version":"2024.11.0","token":"cd0b4b3a733644fc843ef0b185f98241","server_timing":{"name":{"cfcachestatus":true,"cfedge":true,"cfextpri":true,"cfl4":true,"cforigin":true,"cfspeedbrain":true},"location_startswith":null}}"="" crossorigin="anonymous"></script>
 
 <script>
 $(document).ready(function () {
@@ -82,16 +72,31 @@ $(document).ready(function () {
     $('.add-to-cart').click(function (e) {
         e.preventDefault();
 
-        let button = $(this);   // ✅ আগে declare
+        let button = $(this);
 
         let productId = button.data('id');
+        // 🔥 Existing variant_id button data
         let variantId = button.data('variant_id');
+
+        // 🔥 Selected size jodi undefined hoy
+        if (variantId === undefined) {
+            variantId = $('input[name="variant_id"]:checked').val();
+        }
+
+        // 🔥 Check
+        if (!variantId) {
+            alert('Please select a size');
+            return;
+        }
+
         let image = button.closest('.product-card').find('.product-img');
         let cart = $('.cart-icon');
-  if (!image.length) {
+
+        if (!image.length) {
             console.warn('Product image not found for flying animation');
             return;
         }
+
         let flyingImg = image.clone()
             .css({
                 position: 'absolute',
@@ -106,6 +111,7 @@ $(document).ready(function () {
             top: cart.offset().top,
             left: cart.offset().left,
             width: 20,
+            height: 20,
             opacity: 0.5
         }, 700, function () {
             flyingImg.remove();
@@ -114,7 +120,7 @@ $(document).ready(function () {
         $.post("{{ route('cart.add') }}", {
             _token: "{{ csrf_token() }}",
             product_id: productId,
-            variant_id: variantId
+            variant_id: variantId,
         }, function (res) {
             $('.cart-count').text(res.count);
         });
@@ -123,6 +129,7 @@ $(document).ready(function () {
 
 });
 </script>
+
 <script>
 $(document).ready(function () {
 

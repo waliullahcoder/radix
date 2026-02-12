@@ -36,8 +36,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="{{ asset(file_exists($settings->page_heading_bg) ? $settings->page_heading_bg : 'frontend/images/banner-1.png') }}">
+                    <div class="hero__item set-bg"
+                        data-setbg="{{ asset(file_exists($settings->page_heading_bg) ? $settings->page_heading_bg : 'frontend/images/banner-1.png') }}">
                     </div>
+
                 </div>
             </div>
         </div>

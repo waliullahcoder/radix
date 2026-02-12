@@ -32,6 +32,7 @@ $menus = Category::whereNull('parent_id')
         'url as menu_url',
         'name as category_name',
         'image as image',
+        'description',
         'slug as category_slug',
         'position'
     )

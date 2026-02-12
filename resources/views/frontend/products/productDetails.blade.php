@@ -65,6 +65,7 @@
         <div class="product-info-side">
             <span class="badge">New Arrival</span>
             <h1 class="title">{{ $product->name }}</h1>
+             <h2 class="title">CODE-{{ $product->id }}</h2>
 
             <div class="product__details__option">
             <div class="size-wrapper">

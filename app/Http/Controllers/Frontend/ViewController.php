@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Slider;
+use App\Models\Product;
 use App\Models\HomeSection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,9 +19,13 @@ class ViewController extends Controller
     public function index()
     {
         $menus = $this->frontEndService->getMenu();
-       
+        $featuredProducts = Product::where('status', 1)
+        ->orderBy('id', 'desc')
+        ->take(8)
+        ->get();
         return view('frontend.home', compact(
-            'menus'
+            'menus',
+            'featuredProducts'
         ));
     }
     public function categoryPage($cat_id, $slug, $menu)

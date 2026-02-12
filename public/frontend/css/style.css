@@ -783,9 +783,21 @@ ol {
 /*---------------------
   Featured
 -----------------------*/
+.hero__item {
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    .hero__item {
+        height: 250px;
+    }
+}
 
 .featured {
-	padding-top: 80px;
+	padding-top: 0px;
 	padding-bottom: 40px;
 }
 a:hover{
