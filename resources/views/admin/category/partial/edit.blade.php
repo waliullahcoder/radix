@@ -5,7 +5,7 @@
     @method('PUT')
 
     <div class="modal fade" id="editModal" tabindex="-1">
-        <div class="modal-dialog">
+         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -31,6 +31,9 @@
                                     </option>
                                     <option value="header_child" {{ $data->position == 'header_child' ? 'selected' : '' }}>
                                         Header Child
+                                    </option>
+                                     <option value="single_page" {{ $data->position == 'single_page' ? 'selected' : '' }}>
+                                        Single Page
                                     </option>
 
                                      <option value="left_side" {{ $data->position == 'left_side' ? 'selected' : '' }}>
@@ -59,12 +62,13 @@
                             <label for="url" class="form-label">URL: <span class="text-danger">*</span></label>
                             <input type="text" name="url" id="url" class="form-control" value="{{  $data->getRawOriginal('url') }}" required>
                         </div>
-                    <div class="mb-2">
-                        <label class="form-label">Description</label>
-                        <textarea name="description"
-                                  class="form-control"
-                                  rows="3">{{ $data->description }}</textarea>
+                    
+                   <div class="mb-2">
+                    <label for="description" class="form-label"><b>Description</b></label>
+                    <textarea class="form-control description" id="edit_description" name="description" cols="30" rows="10"
+                        placeholder="Description">{!! old('description', $data->description) !!}</textarea>
                     </div>
+                  
                      <div class="mb-2">
                         <label for="image" class="form-label">Image</label>
                         <input type="file"

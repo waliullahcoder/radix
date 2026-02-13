@@ -102,6 +102,14 @@
                         </li>
                         @endforeach
 
+                        @foreach ($menus['single_page'] as $menu)
+                        <li>
+                            <a href="{{ route('singleDetails', $menu->category_id) }}">
+                                {{$menu->name}}
+                            </a>
+                        </li>
+                        @endforeach
+
                         <li><a href="{{ route('contactPage') }}">Contact</a></li>
                     </ul>
                 </nav>

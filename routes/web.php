@@ -22,6 +22,8 @@ Route::get('/login', function () {
 Route::get('/signup', [ViewController::class, 'signupPage'])->name('auth.signupPage');
 Route::get('/contact', [ViewController::class, 'contactPage'])->name('contactPage');
 
+Route::get('/details/{id}', [ViewController::class, 'singleDetails'])->name('singleDetails');
+
 Route::post('/signin', [UserController::class, 'signinPost'])->name('user.signinPost');
 Route::post('/signup', [UserController::class, 'signupPost'])->name('user.signupPost');
 

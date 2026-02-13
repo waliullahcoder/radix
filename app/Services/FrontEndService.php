@@ -42,6 +42,7 @@ $menus = Category::whereNull('parent_id')
 $data['header_parent']         = $menus['header_parent']        ?? collect();
 $data['header_child']      = $menus['header_child']            ?? collect();
 $data['left_side']        = $menus['left_side']  ?? collect();
+$data['single_page']        = $menus['single_page']  ?? collect();
 $data['feature_product'] = $menus['feature_product']       ?? collect();
 $data['banner_section'] = $menus['banner_section']       ?? collect();
 $data['exclusive_collection'] = $menus['exclusive_collection']       ?? collect();
@@ -69,6 +70,11 @@ $data['header_child'] = Category::whereNotNull('parent_id')
              return DB::table('categories')
             ->where('parent_id', $category_id)
             ->get();
+     }
+     public function singleDetails($id){
+        return DB::table('categories')
+            ->where('id', $id)
+            ->first();
      }
 
  public function getProductData($cat_id)

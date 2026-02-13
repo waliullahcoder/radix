@@ -69,4 +69,10 @@ class ViewController extends Controller
         $menus = $this->frontEndService->getMenu();
         return view('frontend.contacts.contact',compact('menus'));
     }
+    public function singleDetails($id)
+    {
+        $menus = $this->frontEndService->getMenu();
+        $singleDetail = $this->frontEndService->singleDetails($id);
+        return view('frontend.page.single',compact('menus','singleDetail'));
+    }
 }

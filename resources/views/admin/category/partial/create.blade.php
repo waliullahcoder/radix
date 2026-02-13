@@ -7,7 +7,7 @@
     @csrf
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="addModalLabel">Add New Category</h1>
@@ -42,6 +42,9 @@
                                     </option>
                                     <option value="header_child" {{ old('position') == 'header_child' ? 'selected' : '' }}>
                                         Header Child
+                                    </option>
+                                    <option value="single_page" {{ old('position') == 'single_page' ? 'selected' : '' }}>
+                                        Single Page
                                     </option>
 
                                      <option value="left_side" {{ old('position') == 'left_side' ? 'selected' : '' }}>
@@ -80,11 +83,13 @@
                             <input type="file" name="image" id="image" class="form-control" accept="image/*">
                         </div>
 
+                        
                         <div class="col-12">
-                            <label for="description" class="form-label">Description:</label>
-                            <textarea name="description" cols="17" rows="3" id="description" class="form-control"></textarea>
+                            <label for="description" class="form-label"><b>Description</b></label>
+                            <textarea class="form-control description" id="description" name="description" cols="30" rows="10"
+                            placeholder="Description"></textarea>
+                            </div>
                         </div>
-                    </div>
                 </div>
                 <div class="modal-footer p-1">
                     <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
