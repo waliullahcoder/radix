@@ -52,25 +52,44 @@
                         </div>
                         <div class="product__details__price"><del>৳{{ number_format($product->regular_price) }} </del> ৳{{ number_format($product->sale_price) }}</div>
                         <p>{!! $product->short_description !!}</p>
-                        <div class="product__details__quantity">
+                        <!-- <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
                                     <input type="text" value="1">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <a href="#" class="primary-btn add-to-cart" data-variant_id="{{ $product->variants[0]->id ?? null }}" data-id="{{ $product->id }}">ADD TO CARD</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        @php
+                    $alreadyWishlisted = auth()->check() &&
+                    auth()->user()->wishlists()->where('product_id', $product->id)->exists();
+                @endphp
+                                    @if($alreadyWishlisted)
+                                        <button class="heart-icon" disabled>
+                                            <span class="icon_heart_alt"></span> Wishlisted
+                                        </button>
+                                    @else
+                                        <form action="{{ route('wishlist.store', $product->id) }}"
+                                            method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            <button class="heart-icon">
+                                               <span class="icon_heart_alt"></span> Add to Wishlist
+                                            </button>
+                                        </form>
+                                    @endif
+                        <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                         <ul>
-                            <li><b>Availability</b> <span>In Stock</span></li>
+                            <li><b>Availability</b> <span>{{ $product->variants[0]['stock'] &&  $product->variants[0]['stock'] >0 ? 'In Stock' : 'Out Stock' }}</span></li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                            <li><b>Quantity</b> <span>{{ $product->variants[0]['stock']  &&  $product->variants[0]['stock'] >0 ? $product->variants[0]['stock'] : '0' }}</span></li>
                             <li><b>Share on</b>
                                 <div class="share">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                   
+                            <a href="{{ $settings->instagram ?? '#' }}" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <a href="{{ $settings->twitter ?? '#' }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="{{ $settings->pinterest ?? '#' }}" target="_blank"><i class="fa fa-pinterest"></i></a>
+                            <a href="{{ $settings->linkedin ?? '#' }}" target="_blank"><i class="fa fa-linkedin"></i></a>
                                 </div>
                             </li>
                         </ul>
