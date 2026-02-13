@@ -98,12 +98,13 @@ $(document).ready(function () {
         }
 
         let flyingImg = image.clone()
-            .css({
+             .css({
                 position: 'absolute',
-                zIndex: 999,
+                zIndex: 9999, // increase z-index
                 width: image.width(),
                 top: image.offset().top,
-                left: image.offset().left
+                left: image.offset().left,
+                pointerEvents: 'none', // prevent hover issues
             })
             .appendTo('body');
 
