@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="row">
-                @foreach($menus['left_side'] as $menu)
+                @foreach($menus['exclusive_collection'] as $menu)
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">
                     <div class="blog__item">
@@ -17,7 +17,7 @@
                         </div>
                         <div class="blog__item__text">
                             <h5><a href="{{ route('category.index', [$menu->category_id, $menu->category_slug,$menu->name]) }}">{{ $menu->name }}</a></h5>
-                            <p>{{ $menu->description }} sadasdasdadd</p>
+                            <p>{!! $menu->description !!}</p>
                         </div>
                     </div>
                     </a>
