@@ -135,7 +135,7 @@
             <div class="col-lg-9">
                 <div class="category-product-section pb-4">
                     <div class="container">
-<div class="section-header mb-3">
+                        <div class="section-header mb-3">
                                 <h3 class="section-title">
                                     {{ $single_sub_category->name }}
                                 </h3>

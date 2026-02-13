@@ -3,158 +3,128 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-<style>
-        .container { margin-bottom:20px;}
-        
-        /* Flex Layout */
-        .product-wrapper { display: flex; flex-wrap: wrap; gap: 40px; }
-        .product-image-side { flex: 1; min-width: 300px; }
-        .product-info-side { flex: 1; min-width: 300px; }
-
-        /* Image Slider Area */
-        .main-img { width: 100%; border-radius: 10px; cursor: crosshair; transition: 0.3s; }
-        .thumb-group { display: flex; gap: 10px; margin-top: 15px; }
-        .thumb { width: 80px; height: 80px; border-radius: 5px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
-        .thumb:hover, .thumb.active { border-color: #ff4757; }
-
-        /* Product Details */
-        .badge { background: #ff4757; color: #fff; padding: 4px 10px; border-radius: 5px; font-size: 12px; }
-        .title { font-size: 28px; margin: 15px 0 10px; color: #2f3542; }
-        .price-tag { font-size: 24px; color: #ff4757; font-weight: bold; margin-bottom: 20px; }
-        .description { color: #747d8c; line-height: 1.6; margin-bottom: 25px; }
-
-        /* Actions */
-        .action-area { display: flex; gap: 15px; align-items: center; margin-bottom: 30px; }
-        .qty-input { width: 60px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; text-align: center; }
-        .add-btn { background: #2f3542; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; flex-grow: 1; transition: 0.3s; }
-        .add-btn:hover { background: #000; }
-
-        /* Tabs Section */
-        .tab-section { margin-top: 50px; border-top: 1px solid #eee; padding-top: 30px; }
-        .tab-nav { display: flex; gap: 30px; border-bottom: 2px solid #eee; margin-bottom: 20px; }
-        .tab-link { padding-bottom: 10px; cursor: pointer; color: #747d8c; font-weight: 600; }
-        .tab-link.active { color: #ff4757; border-bottom: 2px solid #ff4757; }
-        .tab-pane { display: none; line-height: 1.8; color: #57606f; }
-        .tab-pane.active { display: block; }
-
-        @media (max-width: 768px) { .product-wrapper { flex-direction: column; } }
-    </style>
-
-    <div class="container">
-    <div class="product-wrapper product-card">
-        
-        <div class="product-image-side">
-            <img class="product-img" src="{{ asset($product->thumbnail) }}" id="mainImage" class="main-img" alt="Product">
-            <div class="thumb-group">
-                <img src="{{ asset($product->thumbnail) }}" class="thumb active" onclick="changeImage(this.src, this)">
-                @if(isset($product->images[0]))
-                <img src="{{ asset($product->images[0]->image) }}" class="thumb active" onclick="changeImage(this.src, this)">
-                @endif
-                @if(isset($product->images[1]))
-                <img src="{{ asset($product->images[1]->image) }}" class="thumb" onclick="changeImage(this.src, this)">
-                @endif
-                @if(isset($product->images[2]))
-                <img src="{{ asset($product->images[2]->image) }}" class="thumb" onclick="changeImage(this.src, this)">
-                @endif
-                @if(isset($product->images[3]))
-                <img src="{{ asset($product->images[3]->image) }}" class="thumb" onclick="changeImage(this.src, this)">
-                @endif
-            </div>
-        </div>
-
-        <div class="product-info-side">
-            <span class="badge">New Arrival</span>
-            <h1 class="title">{{ $product->name }}</h1>
-             <h2 class="title">CODE-{{ $product->id }}</h2>
-
-            <div class="product__details__option">
-            <div class="size-wrapper">
-                <span class="label-title">Size:</span>
-                @foreach ($product->variants as $variant)
-                @php
-                    $id = 'size-'.$variant->variant ?? 'NA';
-                @endphp
-                <div class="size-option">
-                    <input type="radio" id="{{ $id }}" name="variant_id" value="{{ $variant->id }}">
-                    <label for="{{ $id }}">{{ $variant->size ?? 'NA' }}</label>
+ <!-- Product Details Section Begin -->
+<section class="product-details spad product-card">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large product-img" src="{{ asset($product->thumbnail) }}" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product__details__pic__slider owl-carousel">
+                            @if(isset($product->thumbnail))
+                            <img data-imgbigurl="{{ asset($product->thumbnail) }}" src="{{ asset($product->thumbnail) }}" alt="" loading="lazy" decoding="async">
+                            @endif
+                           
+                            @foreach ($product->images as $item)
+                            <img data-imgbigurl="{{ asset($item->image) }}" src="{{ asset($item->image) }}" alt="" loading="lazy" decoding="async">
+                            @endforeach
+                            
+                        </div>
+                    </div>
                 </div>
-                @endforeach
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3>{{ $product->name }}</h3>
+                        <h4 class="title">CODE-{{ $product->id }}</h4>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 reviews)</span>
+                        </div>
+                        <div class="product__details__option">
+                            <div class="size-wrapper">
+                                <span class="label-title">Size:</span>
+                                @foreach ($product->variants as $variant)
+                                @php
+                                    $id = 'size-'.$variant->variant ?? 'NA';
+                                @endphp
+                                <div class="size-option">
+                                    <input type="radio" id="{{ $id }}" name="variant_id" value="{{ $variant->id }}">
+                                    <label for="{{ $id }}">{{ $variant->size ?? 'NA' }}</label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="product__details__price"><del>৳{{ number_format($product->regular_price) }} </del> ৳{{ number_format($product->sale_price) }}</div>
+                        <p>{!! $product->short_description !!}</p>
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="primary-btn add-to-cart" data-variant_id="{{ $product->variants[0]->id ?? null }}" data-id="{{ $product->id }}">ADD TO CARD</a>
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <ul>
+                            <li><b>Availability</b> <span>In Stock</span></li>
+                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                            <li><b>Share on</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="false">Reviews <span>(1)</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Products Infomation</h6>
+                                    <p>{!! $product->description !!}</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Products Infomation</h6>
+                                    <p>{!! $product->short_description !!}</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Products Infomation</h6>
+                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
+                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
+                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
+                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
+                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
+                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
+                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
+                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                        Proin eget tortor risus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-           </div>
-
-
-
-            <div class="price-tag"><del>৳{{ number_format($product->regular_price) }} </del> ৳{{ number_format($product->sale_price) }} ৳</div>
-            <p class="description">{!! $product->short_description !!} </p>
-            
-            <div class="action-area">
-                @php
-                    $alreadyWishlisted = auth()->check() &&
-                    auth()->user()->wishlists()->where('product_id', $product->id)->exists();
-                @endphp
-                                    @if($alreadyWishlisted)
-                                        <button class="btn btn-sm btn-danger" disabled>
-                                            ❤️ Wishlisted
-                                        </button>
-                                    @else
-                                        <form action="{{ route('wishlist.store', $product->id) }}"
-                                            method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            <button class="btn btn-outline-danger btn-sm">
-                                                🤍 Add to Wishlist
-                                            </button>
-                                        </form>
-                                    @endif
-               
-                <button class="add-btn add-to-cart" data-id="{{ $product->id }}">Add to Cart</button>
-            </div>
-
-            <p><strong>Category:</strong> Electronics, Audio</p>
-            <p><strong>Availability:</strong> In Stock</p>
         </div>
-    </div>
-
-    <div class="tab-section">
-        <div class="tab-nav">
-            <div class="tab-link active" onclick="switchTab(event, 'details')">Description</div>
-            <div class="tab-link" onclick="switchTab(event, 'spec')">Specifications</div>
-            <div class="tab-link" onclick="switchTab(event, 'reviews')">Reviews (12)</div>
-        </div>
-
-        <div id="details" class="tab-pane active">
-            <p>Ekhane product er bistarito bivoron thakbe. Design ti khub e clean rakha hoyeche jate user er prochondo sahajjo hoy.</p>
-        </div>
-        <div id="spec" class="tab-pane">
-            <ul>
-                <li>Battery Life: 40 Hours</li>
-                <li>Bluetooth: 5.2 Version</li>
-                <li>Weight: 250g</li>
-            </ul>
-        </div>
-        <div id="reviews" class="tab-pane">
-            <p>Customer reviews ebong ratings ekhane show kora hobe.</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Image Switcher Logic
-    function changeImage(src, el) {
-        document.getElementById('mainImage').src = src;
-        document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-        el.classList.add('active');
-    }
-
-    // Tab Switcher Logic
-    function switchTab(e, tabId) {
-        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-        
-        document.getElementById(tabId).classList.add('active');
-        e.currentTarget.classList.add('active');
-    }
-</script>
+    </section>
+    <!-- Product Details Section End -->
 
 
 
