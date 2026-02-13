@@ -51,11 +51,6 @@
                                             CODE-{{ $product->id }}
                                         </b>
 
-                                        <p class="product-card-author truncate-text"
-                                        style="--lines: 2;">
-                                            {!! $product->short_description !!}
-                                        </p>
-
                                         <span class="product-card-price">
 
                                             {{-- SALE PRICE --}}

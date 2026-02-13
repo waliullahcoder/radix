@@ -29,14 +29,28 @@
                     <div class="product__details__text">
                         <h3>{{ $product->name }}</h3>
                         <h4 class="title">CODE-{{ $product->id }}</h4>
-                        <div class="product__details__rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
-                        </div>
+                    
+                         <!-- RATING -->
+                                @php
+                                    $avgRating   = round($product->averageRating(), 1); // e.g. 4.5
+                                    $reviewCount = $product->reviews->count();          // total users
+                                @endphp
+                         <div class="product__details__rating">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        @if($i <= floor($avgRating))
+                                            <span>★</span>
+                                        @elseif($i - $avgRating < 1)
+                                             ☆
+                                        @else
+                                            ☆
+                                        @endif
+                                    @endfor
+
+                                    <span class="text-muted">
+                                        ({{ $avgRating > 0 ? $avgRating : '0.0' }} / 5
+                                        · {{ $reviewCount }} {{ $reviewCount == 1 ? 'review' : 'reviews' }})
+                                    </span>
+                                </div>
                         <div class="product__details__option">
                             <div class="size-wrapper">
                                 <span class="label-title">Size:</span>
@@ -54,7 +68,7 @@
                             </div>
                         </div>
                         <div class="product__details__price"><del>৳{{ number_format($product->regular_price) }} </del> ৳{{ number_format($product->sale_price) }}</div>
-                        <p>{!! $product->short_description !!}</p>
+                       
                         <!-- <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
@@ -81,20 +95,53 @@
                                             </button>
                                         </form>
                                     @endif
-                        <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                         <ul>
+                            @if($product->variants->count() > 0)
                             <li><b>Availability</b> <span>{{ $product->variants[0]['stock'] &&  $product->variants[0]['stock'] >0 ? 'In Stock' : 'Out Stock' }}</span></li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
                             <li><b>Quantity</b> <span>{{ $product->variants[0]['stock']  &&  $product->variants[0]['stock'] >0 ? $product->variants[0]['stock'] : '0' }}</span></li>
-                            <li><b>Share on</b>
-                                <div class="share">
-                                   
-                            <a href="{{ $settings->instagram ?? '#' }}" target="_blank"><i class="fa fa-instagram"></i></a>
-                            <a href="{{ $settings->twitter ?? '#' }}" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="{{ $settings->pinterest ?? '#' }}" target="_blank"><i class="fa fa-pinterest"></i></a>
-                            <a href="{{ $settings->linkedin ?? '#' }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            @endif
+                            @php
+                                $currentUrl = urlencode(url()->current());
+                                $title = urlencode($singleDetail->name ?? $product->name ?? 'Check this out');
+                            @endphp
+                            <li>
+                            <b>Share on</b>
+                            <div class="share">
+
+                                {{-- Facebook --}}
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ $currentUrl }}" 
+                                target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+
+                                {{-- Twitter --}}
+                                <a href="https://twitter.com/intent/tweet?url={{ $currentUrl }}&text={{ $title }}" 
+                                target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+
+                                {{-- LinkedIn --}}
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $currentUrl }}" 
+                                target="_blank">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+
+                                {{-- Pinterest --}}
+                                <a href="https://pinterest.com/pin/create/button/?url={{ $currentUrl }}" 
+                                target="_blank">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                                    {{-- WhatsApp --}}
+                                    <a href="https://api.whatsapp.com/send?text={{ $title }}%20{{ $currentUrl }}" 
+                                    target="_blank" class="wa">
+                                      💬 WhatsApp 🟢
+                                    </a>
+
+
                                 </div>
-                            </li>
+                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -121,18 +168,19 @@
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Products Infomation</h6>
+                                     <p>{!! $product->short_description !!}</p>
                                     <table class="table table-bordered">
                                 <tr>
                                     <th>Category ID</th>
-                                    <td>{{ $product->category_id }}</td>
+                                    <td>{{ $product->category->name?? 'NA' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Brand ID</th>
-                                    <td>{{ $product->brand_id }}</td>
+                                    <td>{{ $product->brand->name?? 'NA' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Publication</th>
-                                    <td>{{ $product->publication_id }}</td>
+                                    <th>Vendors</th>
+                                    <td>{{ $product->vendors->pluck('name')->implode(', ') }}</td>
                                 </tr>
                                 <tr>
                                     <th>Barcode</th>
