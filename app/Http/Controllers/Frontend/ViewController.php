@@ -19,13 +19,44 @@ class ViewController extends Controller
     public function index()
     {
         $menus = $this->frontEndService->getMenu();
-        $featuredProducts = Product::where('status', 1)
-        ->orderBy('id', 'desc')
-        ->take(8)
-        ->get();
+        // Base query for active products
+        $activeProductsQuery = Product::where('status', 1);
+
+        // Featured Products (latest 8)
+        $featuredProducts = (clone $activeProductsQuery)
+            ->orderBy('id', 'desc')
+            ->take(8)
+            ->get();
+
+        // Latest Products (latest 3)
+        $latests = (clone $activeProductsQuery)
+            ->orderBy('id', 'desc')
+            ->take(3)
+            ->get();
+
+        // Top Rated Products (rating >= 4) - make sure 'rating' column exists
+       $toprated = Product::with('reviews')
+                ->where('status', 1)
+                ->whereHas('reviews', function($query) {
+                    $query->selectRaw('product_id, AVG(rating) as avg_rating')
+                        ->groupBy('product_id')
+                        ->havingRaw('AVG(rating) >= ?', [1]);
+                })
+                ->take(3)
+                ->get();
+        // Products with reviews (latest 3)
+        $reviewedproducts = Product::with('reviews')
+            ->where('status', 1)
+            ->has('reviews')
+            ->orderBy('id', 'desc')
+            ->take(3)
+            ->get();
         return view('frontend.home', compact(
             'menus',
-            'featuredProducts'
+            'featuredProducts',
+            'latests',
+            'toprated',
+            'reviewedproducts'
         ));
     }
     public function categoryPage($cat_id, $slug, $menu)

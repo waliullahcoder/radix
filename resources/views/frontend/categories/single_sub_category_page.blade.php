@@ -159,7 +159,7 @@
                             <h5><del>৳{{ number_format($product->sale_price) }}</del> ৳{{ number_format($product->regular_price) }}</h5>
                             <button class="btn btn-sm btn-danger add-to-cart"
                             data-variant_id="{{ $product->variants[0]->id ?? null }}"
-                                                            data-id="{{ $product->id }}">Add to Cart
+                                                            data-id="{{ $product->id }}">🛒 Add to Cart ➕
                                                         </button>
                         </div>
                         </div>

@@ -81,7 +81,7 @@
                                     {{-- ADD TO CART --}}
                                     <button class="btn btn-sm btn-danger add-to-cart"
                                             data-id="{{ $product->id }}">
-                                        Add to Cart
+                                       🛒 Add to Cart ➕
                                     </button>
 
                                     {{-- REMOVE FROM WISHLIST --}}
