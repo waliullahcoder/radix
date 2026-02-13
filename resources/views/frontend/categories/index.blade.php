@@ -8,118 +8,128 @@
         <div class="row">
 
             <!-- LEFT SIDEBAR -->
-            <div class="col-lg-3 d-none d-lg-block">
-                <div class="filter-box">
-                    <h5 class="filter-title">ফিল্টার</h5>
-                    <!-- SUBJECT -->
-                    <div class="filter-group">
-                        <h6>বিষয়</h6>
-                        <ul>
-                            @foreach($subcategories as $sub)
-                                <li>
-                                    <label>
-                                        <input type="checkbox">
-                                        {{ $sub->name }}
-                                    </label>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <!-- AUTHOR -->
-                    <div class="filter-group">
-                        <h6>লেখক</h6>
-                        <ul>
-                            @foreach($authors ?? [] as $author)
-                                <li>
-                                    <label>
-                                        <input type="checkbox">
-                                        {{ $author->name }}
-                                    </label>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="filter-group">
-                        <h6>পাবলিকেশন</h6>
-                        <ul>
-                            @foreach($publications ?? [] as $pub)
-                                <li>
-                                    <label>
-                                        <input type="checkbox">
-                                        {{ $pub->name }}
-                                    </label>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="filter-group">
-                        <h6>দাম অনুযায়ী</h6>
-
-                        <!-- SORT -->
-                        <ul class="mb-3">
-                            <li>
-                                <label>
-                                    <input type="radio" name="price_sort"
-                                        value="low_high"
-                                        onchange="this.form.submit()"
-                                        {{ request('price_sort') == 'low_high' ? 'checked' : '' }}>
-                                    কম থেকে বেশি
+           <div class="col-lg-3 col-md-5" style="border:1px solid #e3e7e6;">
+                    <div class="sidebar">
+                        <div class="hero__categories">
+                        </div>
+                        <div class="sidebar__item">
+                            <h4>Price</h4>
+                            <div class="price-range-wrap">
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                </div>
+                                <div class="range-slider">
+                                    <div class="price-input">
+                                        <input type="text" id="minamount">
+                                        <input type="text" id="maxamount">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar__item sidebar__item__color--option">
+                            <h4>Colors</h4>
+                            <div class="sidebar__item__color sidebar__item__color--white">
+                                <label for="white">
+                                    White
+                                    <input type="radio" id="white">
                                 </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="price_sort"
-                                        value="high_low"
-                                        onchange="this.form.submit()"
-                                        {{ request('price_sort') == 'high_low' ? 'checked' : '' }}>
-                                    বেশি থেকে কম
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--gray">
+                                <label for="gray">
+                                    Gray
+                                    <input type="radio" id="gray">
                                 </label>
-                            </li>
-                        </ul>
-
-                        <!-- RANGE -->
-                        <ul>
-                            <li>
-                                <label>
-                                    <input type="radio" name="price_range"
-                                        value="0-200"
-                                        onchange="this.form.submit()"
-                                        {{ request('price_range') == '0-200' ? 'checked' : '' }}>
-                                    ০ – ২০০ ৳
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--red">
+                                <label for="red">
+                                    Red
+                                    <input type="radio" id="red">
                                 </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="price_range"
-                                        value="201-500"
-                                        onchange="this.form.submit()"
-                                        {{ request('price_range') == '201-500' ? 'checked' : '' }}>
-                                    ২০১ – ৫০০ ৳
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--black">
+                                <label for="black">
+                                    Black
+                                    <input type="radio" id="black">
                                 </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="price_range"
-                                        value="500+"
-                                        onchange="this.form.submit()"
-                                        {{ request('price_range') == '500+' ? 'checked' : '' }}>
-                                    ৫০০+ ৳
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--blue">
+                                <label for="blue">
+                                    Blue
+                                    <input type="radio" id="blue">
                                 </label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- PRICE -->
-                    <div class="filter-group">
-                        <h6>দাম</h6>
-                        <ul>
-                            <li><label><input type="checkbox"> ০ – ২০০ ৳</label></li>
-                            <li><label><input type="checkbox"> ২০১ – ৫০০ ৳</label></li>
-                            <li><label><input type="checkbox"> ৫০০+ ৳</label></li>
-                        </ul>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--green">
+                                <label for="green">
+                                    Green
+                                    <input type="radio" id="green">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="sidebar__item">
+                            <h4>Popular Size</h4>
+                            <div class="sidebar__item__size">
+                                <label for="large">
+                                    Large
+                                    <input type="radio" id="large">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="medium">
+                                    Medium
+                                    <input type="radio" id="medium">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="small">
+                                    Small
+                                    <input type="radio" id="small">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="tiny">
+                                    Tiny
+                                    <input type="radio" id="tiny">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="sidebar__item">
+                            <div class="latest-product__text">
+                                <h4>Latest Products</h4>
+                                <div class="latest-product__slider owl-carousel">
+                                    <div class="latest-prdouct__slider__item">
+                                        @foreach($featuredProducts as $product)
+                                        <a href="{{route('product.details', $product->id)}}" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="{{ asset($product->thumbnail) }}" alt="" loading="lazy" decoding="async">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{$product->name}}</h6>
+                                                <span>৳{{ number_format($product->sale_price) }}</span>
+                                            </div>
+                                        </a>
+                                        @endforeach
+                                        
+                                    </div>
+                                    <div class="latest-prdouct__slider__item">
+                                         @foreach($featuredProducts as $product)
+                                        <a href="{{route('product.details', $product->id)}}" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="{{ asset($product->thumbnail) }}" alt="" loading="lazy" decoding="async">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{$product->name}}</h6>
+                                                <span>৳{{ number_format($product->sale_price) }}</span>
+                                            </div>
+                                        </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
            
 

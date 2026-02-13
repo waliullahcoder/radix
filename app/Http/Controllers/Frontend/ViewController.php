@@ -34,7 +34,11 @@ class ViewController extends Controller
         $authors = $this->frontEndService->getAuthor();
         $publications = $this->frontEndService->getPublication();
         $subcategories = $this->frontEndService->getProductData($cat_id);
-        return view('frontend.categories.index', compact('menus','subcategories','authors','publications'));
+         $featuredProducts = Product::where('status', 1)
+        ->orderBy('id', 'desc')
+        ->take(8)
+        ->get();
+        return view('frontend.categories.index', compact('menus','subcategories','authors','publications','featuredProducts'));
     }
 
     public function singleCategoryPage($sub_cat_id)
@@ -44,7 +48,11 @@ class ViewController extends Controller
         $subcategories = $this->frontEndService->getProductData($sub_cat_id);
         $authors = $this->frontEndService->getAuthor();
         $publications = $this->frontEndService->getPublication();
-        return view('frontend.categories.single_sub_category_page', compact('menus','subcategories','single_sub_category','authors','publications'));
+         $featuredProducts = Product::where('status', 1)
+        ->orderBy('id', 'desc')
+        ->take(8)
+        ->get();
+        return view('frontend.categories.single_sub_category_page', compact('menus','subcategories','single_sub_category','authors','publications','featuredProducts'));
     }
     public function productDetails($id)
     {
