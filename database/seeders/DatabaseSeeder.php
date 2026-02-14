@@ -14,15 +14,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::create([
+        // 🔥 Admin User
+        $admin = User::create([
             'name' => "Admin",
             'user_name' => "admin",
             'role_status' => 1,
             'phone' => "01711111111",
-            'email' => "wali@gmail.com",
+            'email' => "admin@gmail.com",
             'password' => Hash::make("12345678"),
         ]);
-        $role = Role::create(['name' => 'Software Admin']);
-        $user->assignRole($role);
+
+        $adminRole = Role::firstOrCreate(['name' => 'Software Admin']);
+        $admin->assignRole($adminRole);
+
+
+        // 🔥 Manager User
+        $manager = User::create([
+            'name' => "Manager",
+            'user_name' => "manager",
+            'role_status' => 1,
+            'phone' => "01822222222",
+            'email' => "manager@gmail.com",
+            'password' => Hash::make("12345678"),
+        ]);
+
+        $managerRole = Role::firstOrCreate(['name' => 'Software Admin']);
+        $manager->assignRole($managerRole);
     }
 }

@@ -27,7 +27,9 @@
     </div> -->
 
    
-
+    <!-- Mobile Menu -->
+   @include('layouts.frontend.partial.mobile_menu')
+    <!-- Mobile Menu End -->
     <!-- Header Section Begin -->
     @include('layouts.frontend.partial.header')
     <!-- Header Section End -->

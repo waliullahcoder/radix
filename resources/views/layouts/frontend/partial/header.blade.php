@@ -117,7 +117,7 @@
 
             <div class="col-lg-3">
                 <div class="header__cart">
-                    <ul>
+                        <ul>
                         <li>
                             <a href="{{ route('cart.index') }}" class="cart-icon">
                                 <i class="fa fa-shopping-bag"></i> 
