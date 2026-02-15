@@ -69,21 +69,38 @@ $data['header_child'] = Category::whereNotNull('parent_id')
      public function getSubCategoryData($category_id){
              return DB::table('categories')
             ->where('parent_id', $category_id)
+            ->where('status', 1)
+            ->orderBy('id', 'desc')
             ->get();
      }
      public function singleDetails($id){
         return DB::table('categories')
             ->where('id', $id)
+            ->where('status', 1)
+            ->orderBy('id', 'desc')
             ->first();
      }
 
  public function getProductData($cat_id)
 {
-   
 $categories = Category::where('parent_id', $cat_id)
-        ->with('products','products.variants')
-        ->get();
-       return $categories;
+    ->where('status', 1)
+    ->with([
+        'products' => function ($q) {
+            $q->where('status', 1)
+              ->orderBy('id', 'desc')
+              ->with([
+                  'variants' => function ($v) {
+                      $v->where('status', 1)
+                        ->orderBy('id', 'desc');
+                  }
+              ]);
+        }
+    ])
+    ->orderBy('id', 'desc')
+    ->get();
+
+return $categories;
 }
 
 //--------------Home Page----------------//
@@ -165,12 +182,23 @@ $get_sub_category_product_all = Category::whereNotNull('parent_id')->with('produ
 
  public function singleCategoryPage($sub_cat_id)
 {
-   
-    $single_sub_category = Category::with('products','products.variants')
-        ->where('id', $sub_cat_id)
-        ->first();
-        return $single_sub_category;
-    }
+    $single_sub_category = Category::where('id', $sub_cat_id)
+        ->where('status', 1)
+        ->with([
+            'products' => function ($q) {
+                $q->where('status', 1)
+                  ->orderBy('id', 'desc')
+                  ->with(['variants' => function ($v) {
+                      $v->where('status', 1)
+                        ->orderBy('id', 'desc');
+                  }]);
+            }
+        ])
+        ->firstOrFail();
+
+    return $single_sub_category;
+}
+
 
 public function productDetails($id)
 {

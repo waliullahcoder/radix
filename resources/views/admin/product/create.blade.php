@@ -209,6 +209,18 @@
                         @endforeach
                     </select>
                 </div>
+                 <div class="col-6">
+                    <label for="status" class="form-label"><b>Status</b></label>
+                    <select name="status" id="status" class="form-select select">
+                    <option value="">Select Status</option>
+                    <option value="0">
+                        Inactive
+                    </option>
+                    <option value="1">
+                        Active
+                    </option>
+                </select>
+                </div>
                 <div class="col-12">
                     <label for="tags" class="form-label"><b>Tags</b></label>
                     <input type="text" class="form-control" id="tags" name="tags[]" value="{{ old('tags.0') }}"

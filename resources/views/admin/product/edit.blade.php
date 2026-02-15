@@ -58,7 +58,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-12">
+                <div class="col-6">
                     <label for="vendor_id" class="form-label"><b>Suppliers</b></label>
                     <select name="vendor_id[]" id="vendor_id" class="form-select select" data-placeholder="Select Vendors"
                         multiple>
@@ -70,7 +70,23 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-sm-6">
+                
+
+                <div class="col-6">
+                    <label for="status" class="form-label"><b>Status</b></label>
+                    <select name="status" id="status" class="form-select select">
+    
+                    <option value="">Select Status</option>
+                    <option value="0" {{ old('status', $data->status) == 0 ? 'selected' : '' }}>
+                        Inactive
+                    </option>
+                    <option value="1" {{ old('status', $data->status) == 1 ? 'selected' : '' }}>
+                        Active
+                    </option>
+                </select>
+                </div>
+
+                <div class="col-sm-12">
                     <label for="product_type" class="form-label">
                         <b>Product Type <span class="text-danger">*</span></b>
                     </label>

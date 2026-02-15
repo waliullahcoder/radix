@@ -6,7 +6,7 @@
                              alt="">
                     </a>
         </div>
-        <div class="humberger__menu__cart">
+        <!-- <div class="humberger__menu__cart">
             <ul>
                         <li>
                             <a href="{{ route('cart.index') }}" class="cart-icon">
@@ -15,7 +15,7 @@
                             </a>
                         </li>
                     </ul>
-        </div>
+        </div> -->
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="frontend/images/language.png" alt="" fetchpriority="high" decoding="sync">

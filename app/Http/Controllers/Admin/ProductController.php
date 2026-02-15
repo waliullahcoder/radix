@@ -47,7 +47,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return HelperClass::resourceDataView($this->model::with(['category', 'uom'])->where('product_type', 'book')->orderBy('id', 'desc'), 'thumbnail', null, $this->path, $this->title);
+        return HelperClass::resourceDataView($this->model::with(['category', 'uom'])->where('product_type', 'socks')->orderBy('id', 'desc'), 'thumbnail', null, $this->path, $this->title);
     }
 
     public function skuCombination(Request $request)
@@ -92,13 +92,13 @@ class ProductController extends Controller
         }
 
         $title = $this->create_title;
-        $brands = Brand::where('status', true)->orderBy('name', 'asc')->get();
-        $uoms = Uom::where('status', true)->orderBy('name', 'asc')->get();
-        $subcategories = Category::whereNotNull('parent_id')->where('status', true)->orderBy('name', 'asc')->get();
-        $vendors = Vendor::where('status', true)->orderBy('name', 'asc')->get();
-        $attributes = Attribute::where('status', true)->orderBy('name', 'asc')->get();
-        $authors = Author::where('status', true)->orderBy('name', 'asc')->get();
-        $publications = Publication::where('status', true)->orderBy('name', 'asc')->get();
+        $brands = Brand::where('status', true)->orderBy('id', 'desc')->get();
+        $uoms = Uom::where('status', true)->orderBy('id', 'desc')->get();
+        $subcategories = Category::whereNotNull('parent_id')->where('status', true)->orderBy('id', 'desc')->get();
+        $vendors = Vendor::where('status', true)->orderBy('id', 'desc')->get();
+        $attributes = Attribute::where('status', true)->orderBy('id', 'desc')->get();
+        $authors = Author::where('status', true)->orderBy('id', 'desc')->get();
+        $publications = Publication::where('status', true)->orderBy('id', 'desc')->get();
         return view("admin.{$this->path}.create", compact('title', 'brands', 'uoms', 'subcategories', 'vendors', 'attributes', 'authors', 'publications'));
     }
 
@@ -257,11 +257,11 @@ class ProductController extends Controller
         }
 
         $additionalData = [
-            'brands' => Brand::where('status', true)->orderBy('name', 'asc')->get(),
-            'uoms' => Uom::where('status', true)->orderBy('name', 'asc')->get(),
-            'categories' => Category::where('status', true)->orderBy('name', 'asc')->get(),
-            'vendors' => Vendor::where('status', true)->orderBy('name', 'asc')->get(),
-            'attributes' => Attribute::where('status', true)->orderBy('name', 'asc')->get()
+            'brands' => Brand::where('status', true)->orderBy('id', 'desc')->get(),
+            'uoms' => Uom::where('status', true)->orderBy('id', 'desc')->get(),
+            'categories' => Category::where('status', true)->orderBy('id', 'desc')->get(),
+            'vendors' => Vendor::where('status', true)->orderBy('id', 'desc')->get(),
+            'attributes' => Attribute::where('status', true)->orderBy('id', 'desc')->get()
         ];
 
         return HelperClass::resourceDataEdit($this->model, $id, $this->path, $this->edit_title, $additionalData);
