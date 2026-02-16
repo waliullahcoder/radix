@@ -112,6 +112,16 @@ Route::group(['middleware' => ['admin']], function () {
     // Brand
     Route::resource('/brand', BrandController::class);
 
+
+    //Permission check
+    Route::get('/debug-role', function () {
+        $user = auth()->user();
+
+        return [
+            'roles' => $user->getRoleNames(),
+            'permissions' => $user->getAllPermissions(),
+        ];
+    });
     // Product
     Route::resource('/product', ProductController::class);
     Route::post('/product/sku-combination', [ProductController::class, 'skuCombination'])->name('product.sku-combination');

@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("12345678"),
         ]);
 
-        $managerRole = Role::firstOrCreate(['name' => 'Software Admin']);
+        $managerRole = Role::firstOrCreate(['name' => 'System Admin']);
         $manager->assignRole($managerRole);
     }
 }

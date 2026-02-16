@@ -31,6 +31,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        //  dd(Auth::user()->getRoleNames()->first(),Auth::user());
         $data = $this->model::whereNotIn('name', ['Software Admin'])->orderBy('id', 'desc');
         if (!Auth::user()->hasRole('Software Admin')) {
             $data->whereNotIn('name', ['System Admin']);
