@@ -32,7 +32,13 @@ class HelperClass
             ->setRowId(fn($row) => 'row_' . $row->id)
             ->addIndexColumn()
             ->addColumn('checkbox', fn($row) => self::generateCheckbox($row, $relation_data))
-            ->addColumn('status', fn($row) => self::generateSwitch($row, $route_path, 'edit', 'status', 'change-status'))
+            // ->addColumn('status', fn($row) => self::generateSwitch($row, $route_path, 'edit', 'status', 'change-status'))
+            ->addColumn('status', function ($row) use ($route_path) {
+                if (auth()->user()->role_status == 0) {
+                    return ''; // hide status switch
+                }
+                return self::generateSwitch($row, $route_path, 'edit', 'status', 'change-status');
+            })
             ->addColumn('approve', fn($row) => self::generateSwitch($row, $route_path, 'approve', 'approved', 'approve'))
             ->addColumn('actions', fn($row) => self::generateActionButtons($row, $relation_data, $addition_btns, $edit));
 

@@ -58,7 +58,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-6">
+                <div class="{{Auth::user()->role_status==0 ? 'col-sm-12' : 'col-sm-6'}}">
                     <label for="vendor_id" class="form-label"><b>Suppliers</b></label>
                     <select name="vendor_id[]" id="vendor_id" class="form-select select" data-placeholder="Select Vendors"
                         multiple>
@@ -71,7 +71,7 @@
                     </select>
                 </div>
                 
-
+                @if(Auth::user()->role_status!=0)
                 <div class="col-6">
                     <label for="status" class="form-label"><b>Status</b></label>
                     <select name="status" id="status" class="form-select select">
@@ -85,6 +85,7 @@
                     </option>
                 </select>
                 </div>
+                @endif
 
                 <div class="col-sm-12">
                     <label for="product_type" class="form-label">
